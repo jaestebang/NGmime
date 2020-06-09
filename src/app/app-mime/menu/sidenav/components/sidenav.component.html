@@ -1,0 +1,53 @@
+<div class="menu-container" [class.menu-is-mobile]="mobileQuery.matches"
+    [ngClass]="darkTheme ? 'mime-dark-theme':'mime-light-theme'">
+
+    <!-- Toolbar -->
+    <mat-toolbar color="primary" class="menu-toolbar">
+
+        <button mat-icon-button *ngIf="isLogged()" (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <h1 class="menu-app-name">{{ title }}</h1>
+        <div class="flex-spacer"></div>
+        <div>
+            <span class="account-logo items-icon"></span>
+            <a mat-button>Perfil | Idioma</a>
+        </div>
+        <div>
+            <a mat-button (click)="darkTheme = (darkTheme ? false : true)">Modo</a>
+        </div>
+    </mat-toolbar>
+
+    <!-- Container -->
+    <mat-sidenav-container class="menu-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+        hasBackdrop="true">
+
+        <!-- SideNav-->
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'over'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+
+            <!--Items Menú-->
+            <mat-nav-list *ngIf="isLogged()">
+                <!-- <a mat-list-item (click)="snav.toggle()" [routerLink]= nav.codigo *ngFor="let nav of menu">
+                    {{ nav.nombre }}
+                    <mat-divider></mat-divider>
+                </a> -->
+
+                <div *ngFor="let m of menu">
+                    <a mat-list-item (click)="snav.toggle()" [routerLink]="[{ outlets: { snavoutlet: [a.codigo] } }]"
+                        *ngFor="let a of m.app">
+                        {{ a.nombre }}
+                    </a>
+                    <mat-divider></mat-divider>
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <!-- Rutas  -->
+        <mat-sidenav-content>
+            <router-outlet name="snavoutlet"></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>

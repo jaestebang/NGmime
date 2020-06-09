@@ -1,0 +1,21 @@
+  <mat-card class="login-card mat-elevation-z20">
+    <mat-card-header>
+      <mat-card-title>MIME</mat-card-title>
+      <mat-card-subtitle>Iniciar sesión</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="login($event)">
+      <p>
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <input type="text" matInput formControlName="user">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput formControlName="pass">
+        </mat-form-field>
+      </p>
+      <button mat-raised-button color="primary" type="submit" [disabled]="this.form.invalid">Login</button>
+    </form>
+  </mat-card>
