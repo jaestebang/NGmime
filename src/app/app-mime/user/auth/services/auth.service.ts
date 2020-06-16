@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Constants } from 'src/app/global/constants';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,15 @@ export class AuthService {
    * Login
    * @param user  Usuario
    * @param pass  Contraseña
+   * @param reset Reinicia cookies - storage
    */
-  login(user: string, pass: string): Observable<boolean> {    
+  login(user: string, pass: string, reset: boolean = true): Observable<boolean> {    
 
     //Liberamos todas las cookies - storage
-    this._cookie.deleteAll();
-    localStorage.clear();
+    if (reset) {
+      this._cookie.deleteAll();
+      localStorage.clear();
+    }
 
     //Aquí se debe realizar el llamado al endopoint
 
@@ -36,13 +39,13 @@ export class AuthService {
     this._cookie.set("token", pass, Constants.timeExpireCookie, "/");
 
     //Retorna si está logueado
-    return this.isLogged();
+    return this.isLogged$();
   }
 
   /**
    * Verifica si el usuario ha iniciado sesión
    */
-  isLogged(): Observable<boolean> {
+  isLogged$(): Observable<boolean> {
     return new Observable<boolean>(obs => {
       obs.next((this.getToken().length > 0) ? true : false);
     })

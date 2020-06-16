@@ -1,0 +1,16 @@
+<mat-card class="login-card mat-elevation-z20">
+    <mat-card-header>
+        <div mat-card-avatar class="unlock-header-img"></div>
+        <mat-card-title>Unlock</mat-card-title>
+        <mat-card-subtitle>Camila Ospina Pérez</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="login($event)">
+        <p>
+            <mat-form-field>
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput formControlName="pass">
+            </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.form.invalid">Login</button>
+    </form>
+</mat-card>

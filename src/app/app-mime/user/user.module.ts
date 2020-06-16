@@ -5,12 +5,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedFormsModule } from 'src/app/shared/sharedforms.module';
 import { AuthComponent } from './auth/components/auth.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UnlockComponent } from './unlock/unlock.component';
 
 
 @NgModule({
   declarations: [
     AuthComponent,
-    ProfileComponent
+    ProfileComponent,
+    UnlockComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { ProfileComponent } from './profile/profile.component';
   providers: [CookieService],
   exports: [
     CommonModule,
-    AuthComponent
+    AuthComponent,
+    UnlockComponent
   ]
 })
 export class UserModule { }

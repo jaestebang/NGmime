@@ -8,11 +8,11 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <h1 class="menu-app-name">{{ title }}</h1>
+        <h1 class="menu-app-name">{{ title }}</h1> 
         <div class="flex-spacer"></div>
         <div>
             <span class="account-logo items-icon"></span>
-            <a mat-button>Perfil | Idioma</a>
+            <a mat-button (click)="unlock()">Perfil | Idioma</a>
         </div>
         <div>
             <a mat-button (click)="darkTheme = (darkTheme ? false : true)">Modo</a>
@@ -29,11 +29,6 @@
 
             <!--Items Menú-->
             <mat-nav-list *ngIf="isLogged()">
-                <!-- <a mat-list-item (click)="snav.toggle()" [routerLink]= nav.codigo *ngFor="let nav of menu">
-                    {{ nav.nombre }}
-                    <mat-divider></mat-divider>
-                </a> -->
-
                 <div *ngFor="let m of menu">
                     <a mat-list-item (click)="snav.toggle()" [routerLink]="[{ outlets: { snavoutlet: [a.codigo] } }]"
                         *ngFor="let a of m.app">

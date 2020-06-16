@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     let ind;
 
-    this._aus.isLogged()
+    this._aus.isLogged$()
       .subscribe({
         next: (value) => {
           ind = value;

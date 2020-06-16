@@ -4,6 +4,7 @@ import { SidenavComponent } from './sidenav/components/sidenav.component';
 import { SharedFormsModule } from 'src/app/shared/sharedforms.module';
 import { MimeRoutingModule } from '../mime-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { UserModule } from '../user/user.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     SharedFormsModule,
     MimeRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   exports: [
     CommonModule,
