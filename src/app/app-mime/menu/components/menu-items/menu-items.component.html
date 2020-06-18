@@ -1,0 +1,20 @@
+<ng-container *ngIf="menuitem.nombre">
+    <a mat-list-item [ngStyle]="{'padding-left': (idx * 12) + 'px'}" (click)="onItemSelected(menuitem)"
+        [ngClass]="{'active': menuitem.route ? true: false, 'expanded': expanded}">
+
+        <!--Nombre: menú|submenú|aplicación -->
+        {{ menuitem.nombre }}
+
+        <span fxFlex *ngIf="menuitem.app && menuitem.app.length">
+            <span fxFlex></span>
+            <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+                expand_more
+            </mat-icon>
+        </span>
+    </a>
+</ng-container>
+
+<!--Cargamos las aplicaciones-->
+<div *ngIf="expanded">
+    <menu-items *ngFor="let app of menuitem.app" [menuitem]="app" [idx]="idx+1"></menu-items>
+</div>

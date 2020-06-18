@@ -7,8 +7,8 @@ import { AuthService } from 'src/app/app-mime/user/auth/services/auth.service';
 import { UnlockComponent } from 'src/app/app-mime/user/unlock/unlock.component';
 import { Crypto } from 'src/app/global/crypto';
 import { isNullOrUndefined } from 'util';
-import { ISidenav } from '../interfaces/isidenav';
-import { SidenavService } from '../services/sidenav.service';
+import { ISidenav } from '../../interfaces/isidenav';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'menu-sidenav',
@@ -126,7 +126,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
           //Guardar menú localstorage
           localStorage.setItem("menu", Crypto.encryptAES(JSON.stringify(m)));
-
+          
           //Asigna menú
           this.menu = m;
         });

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoadComponent } from './components/load/load.component';
 import { MaterialModule } from './material.module';
-import { LoadComponent } from './load/load.component';
 
 @NgModule({
   declarations: [

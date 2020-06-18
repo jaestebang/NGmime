@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidenavComponent } from './sidenav/components/sidenav.component';
 import { SharedFormsModule } from 'src/app/shared/sharedforms.module';
 import { MimeRoutingModule } from '../mime-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from '../user/user.module';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 
 
 @NgModule({
   declarations: [
-    SidenavComponent
+    SidenavComponent,
+    MenuItemsComponent
   ],
   imports: [
     CommonModule,

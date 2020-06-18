@@ -1,0 +1,40 @@
+{
+    "menu": [
+        {
+            "codigo": "menu_admin",
+            "nombre": "Administración",
+            "app": [
+                {
+                    "codigo": "auth",
+                    "route": "true",
+                    "nombre": "Iniciar sesión",
+                    "modo": 1
+                },
+                {
+                    "codigo": "profile",
+                    "route": "true",
+                    "nombre": "Perfil de usuario",
+                    "modo": 1
+                },
+                {
+                    "codigo": "config",
+                    "nombre": "Configuraciones",
+                    "app": [
+                        {
+                            "codigo": "procesos",
+                            "route": "true",
+                            "nombre": "Configuración de procesos",
+                            "modo": 1
+                        },
+                        {
+                            "codigo": "notifi",
+                            "route": "true",
+                            "nombre": "Notificaciones",
+                            "modo": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

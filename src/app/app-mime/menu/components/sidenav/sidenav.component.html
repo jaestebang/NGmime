@@ -27,15 +27,25 @@
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'over'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
 
-            <!--Items Menú-->
+            <!--Lista Menú-->
             <mat-nav-list *ngIf="isLogged()">
-                <div *ngFor="let m of menu">
+
+                <!--Items Menú-->
+                <menu-items *ngFor="let menuitem of menu" [menuitem] = "menuitem"></menu-items>
+
+                <!-- Recorre Menú -->
+<!--                 <li *ngFor="let m of menu">
+                    <a class="menu-link">
+                        <span class="">{{ m.nombre }}</span>
+                        <span></span>
+                    </a>
+                
+                
                     <a mat-list-item (click)="snav.toggle()" [routerLink]="[{ outlets: { snavoutlet: [a.codigo] } }]"
                         *ngFor="let a of m.app">
                         {{ a.nombre }}
                     </a>
-                    <mat-divider></mat-divider>
-                </div>
+                </li> -->
             </mat-nav-list>
         </mat-sidenav>
 
