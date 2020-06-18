@@ -1,8 +1,8 @@
-<ng-container *ngIf="menuitem.nombre">
-    <a mat-list-item [ngStyle]="{'padding-left': (idx * 12) + 'px'}" (click)="onItemSelected(menuitem)"
-        [ngClass]="{'active': menuitem.route ? true: false, 'expanded': expanded}">
+<ng-template [ngIf]="!menuitem.route" [ngIfElse]="app">
+    <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 12) + 'px'}"
+        (click)="onItemSelected(menuitem)" [ngClass]="{'expanded': expanded}">
 
-        <!--Nombre: menú|submenú|aplicación -->
+        <!--Nombre: menú|submenú -->
         {{ menuitem.nombre }}
 
         <span fxFlex *ngIf="menuitem.app && menuitem.app.length">
@@ -12,7 +12,17 @@
             </mat-icon>
         </span>
     </a>
-</ng-container>
+</ng-template>
+
+<ng-template #app>
+    <a mat-list-item [ngStyle]="{'padding-left': (idx * 12) + 'px'}" (click)="onItemSelected(menuitem)"
+        [ngClass]="{'active': menuitem.route ? true: false}"
+        [routerLink]="[{ outlets: { snavoutlet: [menuitem.codigo] } }]">
+
+        <!--Nombre: aplicación -->
+        {{ menuitem.nombre }}
+    </a>
+</ng-template>
 
 <!--Cargamos las aplicaciones-->
 <div *ngIf="expanded">

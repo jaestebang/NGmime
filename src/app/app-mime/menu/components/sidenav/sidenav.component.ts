@@ -3,12 +3,12 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AsyncSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from 'src/app/app-mime/user/auth/services/auth.service';
-import { UnlockComponent } from 'src/app/app-mime/user/unlock/unlock.component';
 import { Crypto } from 'src/app/global/crypto';
 import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
+import { UnlockComponent } from 'src/app/app-mime/user/components/unlock/unlock.component';
+import { AuthService } from 'src/app/app-mime/user/services/auth.service';
 
 @Component({
   selector: 'menu-sidenav',

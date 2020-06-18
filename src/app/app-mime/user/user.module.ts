@@ -3,9 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedFormsModule } from 'src/app/shared/sharedforms.module';
-import { AuthComponent } from './auth/components/auth.component';
-import { ProfileComponent } from './profile/profile.component';
-import { UnlockComponent } from './unlock/unlock.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { ProfileComponent } from '../pages/config/components/profile/profile.component';
+import { UnlockComponent } from './components/unlock/unlock.component';
 
 
 @NgModule({

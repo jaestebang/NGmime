@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
-import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Crypto } from 'src/app/global/crypto';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'user-unlock',

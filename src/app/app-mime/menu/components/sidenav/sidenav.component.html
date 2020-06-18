@@ -8,7 +8,7 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <h1 class="menu-app-name">{{ title }}</h1> 
+        <h1 class="menu-app-name">{{ title }}</h1>
         <div class="flex-spacer"></div>
         <div>
             <span class="account-logo items-icon"></span>
@@ -29,23 +29,7 @@
 
             <!--Lista Menú-->
             <mat-nav-list *ngIf="isLogged()">
-
-                <!--Items Menú-->
-                <menu-items *ngFor="let menuitem of menu" [menuitem] = "menuitem"></menu-items>
-
-                <!-- Recorre Menú -->
-<!--                 <li *ngFor="let m of menu">
-                    <a class="menu-link">
-                        <span class="">{{ m.nombre }}</span>
-                        <span></span>
-                    </a>
-                
-                
-                    <a mat-list-item (click)="snav.toggle()" [routerLink]="[{ outlets: { snavoutlet: [a.codigo] } }]"
-                        *ngFor="let a of m.app">
-                        {{ a.nombre }}
-                    </a>
-                </li> -->
+                <menu-items *ngFor="let menuitem of menu" [menuitem]="menuitem"></menu-items>
             </mat-nav-list>
         </mat-sidenav>
 
