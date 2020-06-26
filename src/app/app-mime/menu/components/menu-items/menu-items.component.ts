@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { trigger, state, animate, transition, style } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Input, OnInit } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../../interfaces/isidenav';
-import { RouterLink, Router } from '@angular/router';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'menu-items',
@@ -28,28 +28,29 @@ export class MenuItemsComponent implements OnInit {
   //Variables clase
   expanded: boolean;
 
-  constructor() {
+  constructor(private _snav: SidenavService) {
 
     //Se inicializa si no está definida
     if (isNullOrUndefined(this.idx)) this.idx = 0;
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
   }
 
   /**
    * Seleccionar ítem
-   * @param item 
+   * @param item Menú de navegación
    */
   onItemSelected(item: ISidenav) {
     if (item.app && item.app.length) {
       this.expanded = !this.expanded;
-    }
+    } else this.ontoggleSideNav();
   }
 
-  routerLink(item: ISidenav): string{
-    let r: RouterLink;
-    r.routerLink
-    return ((!item.route) ? null : "[{ outlets: { snavoutlet: [menuitem.codigo] } }]");
+  /**
+   * Emite el evento toogle SideNav
+   */
+  ontoggleSideNav(): void {
+    this._snav.toggleSnav();
   }
 }

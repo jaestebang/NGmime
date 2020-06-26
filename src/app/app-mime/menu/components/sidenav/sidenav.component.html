@@ -29,7 +29,8 @@
 
             <!--Lista Menú-->
             <mat-nav-list *ngIf="isLogged()">
-                <menu-items *ngFor="let menuitem of menu" [menuitem]="menuitem"></menu-items>
+                <menu-items *ngFor="let menuitem of menu" [menuitem]="menuitem">
+                </menu-items>
             </mat-nav-list>
         </mat-sidenav>
 

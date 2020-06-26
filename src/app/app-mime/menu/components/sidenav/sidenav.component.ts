@@ -1,25 +1,29 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { AsyncSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UnlockComponent } from 'src/app/app-mime/user/components/unlock/unlock.component';
+import { AuthService } from 'src/app/app-mime/user/services/auth.service';
 import { Crypto } from 'src/app/global/crypto';
 import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
-import { UnlockComponent } from 'src/app/app-mime/user/components/unlock/unlock.component';
-import { AuthService } from 'src/app/app-mime/user/services/auth.service';
 
 @Component({
   selector: 'menu-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit, OnDestroy {
+export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //Variables privadas
   private unsubscribe$: Subject<void> = new Subject<void>();
   private unlock$: AsyncSubject<boolean> = new AsyncSubject<boolean>();
+
+  //ViewChild
+  @ViewChild("snav") private snavElement: MatSidenav;
 
   //Variables públicas
   menu: ISidenav[] = null;
@@ -43,6 +47,16 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
+  /**
+   * Inicializa views
+   */
+  ngAfterViewInit(): void {
+    this._snav.setSnavElement(this.snavElement);
+  }
+
+  /**
+   * Destruye componente
+   */
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.unsubscribe$.next();
@@ -50,6 +64,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.unlock$.complete();
   }
 
+  /**
+   * Init
+   */
   ngOnInit(): void {
     this.initSubject();
     this.getMenu();
@@ -95,11 +112,15 @@ export class SidenavComponent implements OnInit, OnDestroy {
   unlock() {
     console.log("Unlock");
 
+    this.menu = null;
     const dialogUnlock = this._mdialog.open(UnlockComponent, { disableClose: true });
 
     //Subscribe a la acción
     dialogUnlock.afterClosed()
       .subscribe((result) => {
+        
+        //Obtener menú
+        this.getMenu();
 
         //Inicializar AsyncSubject
         this.unlock$ = new AsyncSubject();
@@ -126,11 +147,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
           //Guardar menú localstorage
           localStorage.setItem("menu", Crypto.encryptAES(JSON.stringify(m)));
-          
+
           //Asigna menú
           this.menu = m;
         });
     }
   }
-
 }
