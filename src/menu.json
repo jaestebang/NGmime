@@ -1,6 +1,11 @@
 {
     "menu": [
         {
+            "codigo": "dashboard",
+            "nombre": "Dashboard",
+            "route": "true"
+        },
+        {
             "codigo": "menu_admin",
             "nombre": "Administración",
             "app": [
@@ -33,6 +38,18 @@
                             "modo": 1
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "codigo": "reaseg",
+            "nombre": "Reaseguro",
+            "app": [
+                {
+                    "codigo": "contratos",
+                    "route": "true",
+                    "nombre": "Contratos de reaseguro",
+                    "modo": 1
                 }
             ]
         }

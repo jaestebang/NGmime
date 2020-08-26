@@ -11,16 +11,19 @@
         <h1 class="menu-app-name">{{ title }}</h1>
         <div class="flex-spacer"></div>
         <div>
-            <span class="account-logo items-icon"></span>
-            <a mat-button (click)="unlock()">Perfil | Idioma</a>
+            <a mat-button matTooltip="Bloquear / Desbloquear" (click)="unlock()">
+                <mat-icon>lock</mat-icon>
+            </a>
         </div>
         <div>
-            <a mat-button (click)="darkTheme = (darkTheme ? false : true)">Modo</a>
+            <a mat-button (click)="darkTheme = (darkTheme ? false : true)">
+                <mat-icon>palette</mat-icon>
+            </a>
         </div>
     </mat-toolbar>
 
     <!-- Container -->
-    <mat-sidenav-container class="menu-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+    <mat-sidenav-container id="msc" class="menu-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
         hasBackdrop="true">
 
         <!-- SideNav-->
@@ -29,6 +32,16 @@
 
             <!--Lista Menú-->
             <mat-nav-list *ngIf="isLogged()">
+                <!--Logo-->
+                <div class="logo">
+                    <a href="" class="simple-text">
+                        <div class="logo-img">
+                            <img src="/assets/img/angular.png" />
+                        </div>
+                        Diseño Creativo
+                    </a>
+                </div>
+
                 <menu-items *ngFor="let menuitem of menu" [menuitem]="menuitem">
                 </menu-items>
             </mat-nav-list>

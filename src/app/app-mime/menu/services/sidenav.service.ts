@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Observable } from 'rxjs';
 import { ISidenav } from '../interfaces/isidenav';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidenavService {
-  private api_url: string = "http://localhost:3000";
   private snavElement: MatSidenav
 
   constructor(private _http: HttpClient) { }
@@ -20,7 +19,7 @@ export class SidenavService {
     console.log("Inicio servicio menú");
 
     //Obtener menú API
-    return this._http.get<ISidenav[]>(`${this.api_url}/menu`);
+    return this._http.get<ISidenav[]>("/menu");
   }
 
   /**

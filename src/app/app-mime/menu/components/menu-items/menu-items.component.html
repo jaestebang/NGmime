@@ -1,11 +1,12 @@
 <ul class="mime-light-theme menu-wrap animated fadeIn">
     <li class="menu-item">
         <ng-template [ngIf]="!menuitem.route" [ngIfElse]="app">
-            <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 12) + 'px'}"
+            <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 0) + 'px'}"
                 (click)="onItemSelected(menuitem)" [ngClass]="{'expanded': expanded}">
 
                 <!--Nombre: menú|submenú -->
-                <span class="text">{{menuitem.nombre}}</span>
+                <mat-icon class="">{{menuitem.icon}}</mat-icon>
+                <span class="text textmenu">{{menuitem.nombre}}</span>
 
                 <span fxFlex *ngIf="menuitem.app && menuitem.app.length">
                     <span fxFlex></span>
@@ -22,6 +23,7 @@
                 [routerLink]="[{ outlets: { snavoutlet: [menuitem.codigo] } }]">
 
                 <!--Nombre: aplicación -->
+                <mat-icon>{{menuitem.icon}}</mat-icon>
                 <span class="text">{{menuitem.nombre}}</span>
             </a>
         </ng-template>

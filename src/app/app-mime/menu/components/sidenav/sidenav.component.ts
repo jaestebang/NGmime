@@ -27,7 +27,7 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //Variables públicas
   menu: ISidenav[] = null;
-  title: string = "MIME";
+  title: string = "MIME Insurance";
   mobileQuery: MediaQueryList;
   darkTheme: boolean;
 

@@ -5,6 +5,7 @@ export interface ISidenav {
     codigo: string,
     nombre: string,
     route?: boolean,
+    icon?: boolean,
     modo?: EOperation,
     app?: ISidenav[]
 }
