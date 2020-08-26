@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent extends MimebaseComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
   }

@@ -31,18 +31,31 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     //Filtra en las opciones
     if (!isNullOrUndefined(menu)) {
-      menu.forEach((aom => {
-        if (ind) return ind;
+      /* for (let i: number = 0; i < menu.length; ++i){
+         let menu_i = menu[i];
+       }*/
 
-        //Busca la aplicación
-        aom.app.map(function mapper(s) {
-          if (Array.isArray(s)) {
-            return s.map(mapper);
-          } else {
-            if (s.codigo === cod) ind = true;
+      try {
+        menu.forEach((aom => {
+          if (ind) return ind;
+
+          //Busca la aplicación
+          if (!isNullOrUndefined(aom.app)) {
+            aom.app.map(function mapper(s) {
+              if (Array.isArray(s)) {
+                return s.map(mapper);
+              } else {
+                if (s.codigo === cod) ind = true;
+              }
+            });
+          } else if (aom.route) {
+            if (aom.codigo === cod) ind = true;
           }
-        });
-      }));
+
+        }));
+      } catch (e) {
+        console.log("error", e);
+      }
 
       //Si no está la opción no permite ingreso
       if (!ind) {
