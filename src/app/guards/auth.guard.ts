@@ -84,9 +84,12 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           if (!value) this._route.navigate(["auth"]);
         }
       }
-      );
+    );
+    
     //Valida si permite opción de menú
     ind = (ind && next.routeConfig.outlet === "snavoutlet") ? this.filterApp(next.routeConfig.path) : ind;
+
+    if (!ind) this._route.navigate(["auth"]);
 
     return ind;
   }

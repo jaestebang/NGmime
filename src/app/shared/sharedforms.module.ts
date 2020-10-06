@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoadComponent } from './components/load/load.component';
 import { MaterialModule } from './material.module';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { MimebaseComponent } from './components/mimebase/mimebase.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
-    LoadComponent,
     NotfoundComponent,
     MimebaseComponent
   ],
@@ -16,17 +15,20 @@ import { MimebaseComponent } from './components/mimebase/mimebase.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    LoadComponent,
     NotfoundComponent,
-    MimebaseComponent
+    MimebaseComponent,
+    NgxSpinnerModule
   ]
 })
+  
 export class SharedFormsModule {
 }

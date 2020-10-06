@@ -18,7 +18,7 @@
         </ng-template>
 
         <ng-template #app>
-            <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 12) + 'px'}"
+            <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 0) + 'px'}"
                 (click)="onItemSelected(menuitem)" [ngClass]="{'active': menuitem.route ? true: false}"
                 [routerLink]="[{ outlets: { snavoutlet: [menuitem.codigo] } }]">
 

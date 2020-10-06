@@ -5,7 +5,6 @@ import { AuthGuard } from '../guards/auth.guard';
 import { SidenavComponent } from './menu/components/sidenav/sidenav.component';
 import { ProfileComponent } from './pages/config/components/profile/profile.component';
 import { AuthComponent } from './user/components/auth/auth.component';
-import { LoadComponent } from '../shared/components/load/load.component';
 import { NotfoundComponent } from '../shared/components/notfound/notfound.component';
 
 const routes: Routes = [

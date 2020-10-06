@@ -1,3 +1,5 @@
+import { EOperation } from '../../../core/enum/enum-mime';
+
 /**
  * Interfaz Menú
  */
@@ -10,10 +12,4 @@ export interface ISidenav {
     app?: ISidenav[]
 }
 
-/**
- * Enumeración modo de aplicación
- */
-export enum EOperation {
-    full = 0,
-    query = 1
-}
+

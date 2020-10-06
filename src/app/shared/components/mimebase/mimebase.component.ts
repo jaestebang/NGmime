@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-mimebase',
@@ -11,9 +12,4 @@ export class MimebaseComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  imprimir(str: string): string {
-    return `Elvalor es: ${str}`;
-  }
-
 }
