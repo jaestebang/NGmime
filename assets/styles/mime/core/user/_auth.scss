@@ -1,0 +1,79 @@
+.mat-typography {
+    height: auto;
+}
+
+button {
+    width: 100%;
+}
+
+.mat-dialog-container {
+    padding: 0px !important;
+
+    .lock-card {
+
+        .mat-form-field {
+            display: initial;
+        }
+
+        .mat-card-header-text {
+            margin: 0 0;
+            margin-top: 15px;
+            text-align: center !important;
+        }
+
+        .unlock-header-img {
+            background-image: url('^assets/img/avatar.jpg');
+            background-size: cover;
+        }
+
+        .mat-card-avatar {
+            height: 100px;
+            width: 100px;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+
+            .mat-card-image:first-child {
+                border-radius: 50%;
+            }
+        }
+
+        .mat-card-header {
+            display: flex;
+            flex-direction: column;
+            width: inherit;
+            justify-content: center;
+
+            mat-card-content {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+.login-card {
+    width: 300px;
+    min-width: 300px;
+    margin: 100px auto;
+
+    .mat-form-field {
+        width: 100%;
+        min-width: 300px;
+    }
+
+    .mat-card-header {
+        justify-content: flex-end;
+        background-image: url('^assets/icon/login-icon.png');
+        background-repeat: no-repeat;
+        background-size: auto;
+
+        mat-card-title,
+        mat-card-subtitle,
+        mat-card-content {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
