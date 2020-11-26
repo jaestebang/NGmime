@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Crypto } from 'src/app/global/crypto';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './unlock.component.html',
   styleUrls: ['./unlock.component.scss']
 })
-export class UnlockComponent implements OnInit {
+export class UnlockComponent extends MimebaseComponent implements OnInit {
 
   form: FormGroup;
   private unsubscribe$: Subject<void> = new Subject<void>();
@@ -21,10 +21,10 @@ export class UnlockComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _aus: AuthService,
-    private _route: Router,
     private _snackBar: MatSnackBar,
     private _dialogRef: MatDialogRef<UnlockComponent>
   ) {
+    super();
     this.buildForm();
   }
 

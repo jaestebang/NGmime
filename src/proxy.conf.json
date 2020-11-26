@@ -4,5 +4,12 @@
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {"^/menu" : ""}
+    },
+
+    "/translate": {
+        "target": "http://localhost:3000/translate",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/menu" : ""}
     }
 }
