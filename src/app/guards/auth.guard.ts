@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
   /**
    * Búsqueda de aplicación
    * @param aom Isidenav
-   * @param cod Código de aplicación
    */
   private filterApp(cod: string): boolean {
 
