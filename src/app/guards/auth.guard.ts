@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../app-mime/menu/interfaces/isidenav';
 import { AuthService } from '../app-mime/user/services/auth.service';
 import { Crypto } from '../global/crypto';
@@ -27,10 +26,10 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     //Obtiene menú localstorage
     const m: string = Crypto.decryptAES(localStorage.getItem("menu"));
-    const menu: ISidenav[] = (isNullOrUndefined(m)) ? null : <ISidenav[]>JSON.parse(m);
+    const menu: ISidenav[] = (m === undefined || m === null) ? null : <ISidenav[]>JSON.parse(m);
 
     //Filtra en las opciones
-    if (!isNullOrUndefined(menu)) {
+    if (!(m === undefined || m === null)) {
       /* for (let i: number = 0; i < menu.length; ++i){
          let menu_i = menu[i];
        }*/
@@ -40,7 +39,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           if (ind) return ind;
 
           //Busca la aplicación
-          if (!isNullOrUndefined(aom.app)) {
+          if (!(aom.app === undefined || aom.app === null)) {
             aom.app.map(function mapper(s) {
               if (Array.isArray(s)) {
                 return s.map(mapper);

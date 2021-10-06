@@ -7,7 +7,6 @@ import { takeUntil } from 'rxjs/operators';
 import { UnlockComponent } from 'src/app/app-mime/user/components/unlock/unlock.component';
 import { AuthService } from 'src/app/app-mime/user/services/auth.service';
 import { Crypto } from 'src/app/global/crypto';
-import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
 
@@ -136,9 +135,9 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 
     //Obtiene menú localstorage
     const m: string = Crypto.decryptAES(localStorage.getItem("menu"));
-    this.menu = (isNullOrUndefined(m)) ? null : <ISidenav[]>JSON.parse(m);
+    this.menu = (m === undefined || m === null) ? null : <ISidenav[]>JSON.parse(m);
 
-    if (isNullOrUndefined(this.menu)) {
+    if (this.menu === undefined || this.menu === null) {
 
       //Suscribe para obtener el menú
       this._snav.getMenuSidenav()

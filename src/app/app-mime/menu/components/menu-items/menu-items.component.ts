@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { isNullOrUndefined } from 'util';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
 
@@ -31,7 +30,7 @@ export class MenuItemsComponent implements OnInit {
   constructor(private _snav: SidenavService) {
 
     //Se inicializa si no está definida
-    if (isNullOrUndefined(this.idx)) this.idx = 0;
+    if (this.idx === undefined || this.idx === null) this.idx = 0;
   }
 
   ngOnInit(): void {
