@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "preinstall": "npx npm-force-resolutions",
     "build:prod:github": "ng build --prod --base-href https://jaestebang.github.io/NGmime/",
     "publish:github": "npx ngh --dir=dist/NGmime"
   },
@@ -66,5 +67,8 @@
   },
   "browser": {
     "crypto": false
+  },
+  "resolutions": {
+    "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz"
   }
 }
