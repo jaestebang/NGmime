@@ -30,6 +30,7 @@
     "angular-cli-ghpages": "^0.6.2",
     "angular-material-icons": "^0.7.1",
     "crypto-js": "^4.1.1",
+    "json-schema": "^0.4.0",
     "material-design-icons": "^3.0.1",
     "material-design-icons-iconfont": "^6.1.0",
     "ngx-cookie-service": "^12.0.3",

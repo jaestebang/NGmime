@@ -97,7 +97,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "NGmime:build:production"
+              "browserTarget": "NGmime:build:production",
+              "proxyConfig": "src/proxy-prod.conf.json"
             }
           }
         },
