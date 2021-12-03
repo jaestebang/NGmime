@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IQuestions } from '../../interfaces/iquestions';
+import { QuoteService } from '../../services/quote.service';
 
 @Component({
   selector: 'app-base',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseComponent implements OnInit {
 
-  constructor() { }
+  questions: IQuestions[] = null;
+
+  constructor(private _squote: QuoteService) { }
 
   ngOnInit(): void {
+    this._squote.getQuestions()
+      .subscribe((q: IQuestions[]) => {
+        this.questions = q;
+      });
   }
 
 }

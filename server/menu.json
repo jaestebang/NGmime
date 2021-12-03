@@ -1,60 +1,19 @@
-﻿{
-    "menu": [
-        {
-            "codigo": "dashboard",
-            "nombre": "Dashboard",
-            "route": "true",
-			"icon": "dashboard"
-        },
-        {
-            "codigo": "menu_admin",
-            "nombre": "Administración",
-			"icon": "store",
-            "app": [
-                {
-                    "codigo": "auth",
-                    "route": "true",
-                    "nombre": "Iniciar sesión",
-                    "modo": 1
-                },
-                {
-                    "codigo": "profile",
-                    "route": "true",
-                    "nombre": "Perfil de usuario",
-                    "modo": 1
-                },
-                {
-                    "codigo": "config",
-                    "nombre": "Configuraciones",
-                    "app": [
-                        {
-                            "codigo": "procesos",
-                            "route": "true",
-                            "nombre": "Configuración de procesos",
-                            "modo": 1
-                        },
-                        {
-                            "codigo": "notifi",
-                            "route": "true",
-                            "nombre": "Notificaciones",
-                            "modo": 1
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "codigo": "policy",
-            "nombre": "Pólizas",
-			"icon": "request_quote",
-            "app": [
-                {
-                    "codigo": "quote",
-                    "route": "true",
-                    "nombre": "Simulaciones",
-                    "modo": 1
-                }
-            ]
-        }
-    ]
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }

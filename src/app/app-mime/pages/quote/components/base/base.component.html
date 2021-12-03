@@ -1,2 +1,37 @@
 <p>base works!</p>
-<quote-questions></quote-questions>
+<mat-stepper>
+    <mat-step>
+        <ng-template matStepLabel>Datos Póliza</ng-template>
+        <ng-template matStepContent>
+            <p>This content was also rendered lazily</p>
+            <quote-questions [dynamicquestions]="questions"></quote-questions>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </ng-template>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Terceros</ng-template>
+        <p>This content was rendered eagerly</p>
+        <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Riesgo</ng-template>
+        <p>This content was rendered eagerly</p>
+        <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Datos Riesgo</ng-template>
+        <p>This content was rendered eagerly</p>
+        <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Coberturas</ng-template>
+        <p>This content was rendered eagerly</p>
+        <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Detalle Coberturas</ng-template>
+        <p>This content was rendered eagerly</p>
+        <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+</mat-stepper>

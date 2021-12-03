@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Iquestions } from '../../interfaces/iquestions';
+import { IQuestions } from '../../interfaces/iquestions';
 @Component({
   selector: 'quote-questions',
   templateUrl: './questions.component.html',
@@ -8,7 +8,7 @@ import { Iquestions } from '../../interfaces/iquestions';
 export class QuestionsComponent implements OnInit {
 
   //Inputs Decorator
-  @Input() dynamicquestions: Iquestions[];
+  @Input() dynamicquestions: IQuestions[];
 
   constructor() { }
 

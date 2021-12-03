@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "preinstall": "npx npm-force-resolutions",
-    "json:server": "json-server --watch server/menu.json",
+    "json:server": "json-server --watch server/db.json",
     "start:json:server": "concurrently -- kill-others \"npm run json:server\" \"npm run start\"",
     "build:prod:github": "ng build --prod --base-href https://jaestebang.github.io/NGmime/",
     "publish:github": "npx ngh --dir=dist/NGmime"

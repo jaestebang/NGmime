@@ -1,7 +1,7 @@
 /**
  * Interface Questions: Policy - Risk - Coverages - Clauses
  */
-export interface Iquestions {
+export interface IQuestions {
     key: string,
     type: string,
     length?: number,

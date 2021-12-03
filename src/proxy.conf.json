@@ -6,6 +6,13 @@
         "pathRewrite": {"^/menu" : ""}
     },
 
+    "/questions": {
+        "target": "http://localhost:3000/questions",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/questions" : ""}
+    },    
+
     "/translate": {
         "target": "http://localhost:3000/translate",
         "secure": false,

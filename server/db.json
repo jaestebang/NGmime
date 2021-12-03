@@ -1,0 +1,94 @@
+﻿{
+    "menu": [
+        {
+            "codigo": "dashboard",
+            "nombre": "Dashboard",
+            "route": "true",
+            "icon": "dashboard"
+        },
+        {
+            "codigo": "menu_admin",
+            "nombre": "Administración",
+            "icon": "store",
+            "app": [
+                {
+                    "codigo": "auth",
+                    "route": "true",
+                    "nombre": "Iniciar sesión",
+                    "modo": 1
+                },
+                {
+                    "codigo": "profile",
+                    "route": "true",
+                    "nombre": "Perfil de usuario",
+                    "modo": 1
+                },
+                {
+                    "codigo": "config",
+                    "nombre": "Configuraciones",
+                    "app": [
+                        {
+                            "codigo": "procesos",
+                            "route": "true",
+                            "nombre": "Configuración de procesos",
+                            "modo": 1
+                        },
+                        {
+                            "codigo": "notifi",
+                            "route": "true",
+                            "nombre": "Notificaciones",
+                            "modo": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "codigo": "policy",
+            "nombre": "Pólizas",
+            "icon": "request_quote",
+            "app": [
+                {
+                    "codigo": "quote",
+                    "route": "true",
+                    "nombre": "Simulaciones",
+                    "modo": 1
+                }
+            ]
+        }
+    ],
+    "questions": [
+        {
+            "key": 6030,
+            "type": "number",
+            "order": 1,
+            "label": "Pregunta 6030",
+            "value": 10,
+            "required": "true"
+        },
+        {
+            "key": 6031,
+            "type": "date",
+            "order": 1,
+            "label": "Pregunta 6031",
+            "required": "true"
+        },
+        {
+            "key": 6032,
+            "type": "date",
+            "order": 1,
+            "label": "Pregunta 6032",
+            "required": "true",
+            "options": [
+                {
+                    "key": "1",
+                    "value": "rojo"
+                },
+                {
+                    "key": "2",
+                    "value": "amarillo"
+                }
+            ]
+        }
+    ]
+}
