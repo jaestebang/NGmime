@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserModule } from './user/user.module';
+import { NgModule } from '@angular/core';
 import { MenuModule } from './menu/menu.module';
 import { MimeRoutingModule } from './mime-routing.module';
+import { UserModule } from './user/user.module';
+import { QuoteModule } from './pages/quote/quote.module';
 
 @NgModule({
   declarations: [],
@@ -10,11 +11,13 @@ import { MimeRoutingModule } from './mime-routing.module';
     CommonModule,
     UserModule,
     MenuModule,
+    QuoteModule,
     MimeRoutingModule,
   ],
   exports: [
     UserModule,
     MenuModule,
+    QuoteModule,
     MimeRoutingModule
   ]
 })

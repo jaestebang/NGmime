@@ -1,0 +1,33 @@
+<p>questions works!</p>
+<section *ngIf="dynamicquestions">
+    <table>
+        <tbody>
+            <!--Recorre las preguntas-->
+            <tr *ngFor="let q of dynamicquestions">
+
+                <!--Label-->
+                <td>{{ q.label }}</td>
+
+                <!--Inputs-->
+                <td>
+                    <!--Verifica si tiene opciones-->
+                    <div *ngIf="q.options">
+                        <mat-select [id]="q.key">
+                            <mat-option *ngFor="let opt of q.options" [value]="opt.key">
+                                {{ opt.value }}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+
+                    <!--Verfica si no tiene opciones-->
+                    <div *ngIf="!q.options">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{ q.label }}</mat-label>
+                            <input [id]="q.key" [type]="q.type" [value]="q.value" [required]="q.required" />
+                        </mat-form-field>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

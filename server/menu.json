@@ -44,14 +44,14 @@
             ]
         },
         {
-            "codigo": "reaseg",
-            "nombre": "Reaseguro",
+            "codigo": "policy",
+            "nombre": "Pólizas",
 			"icon": "request_quote",
             "app": [
                 {
-                    "codigo": "contratos",
+                    "codigo": "quote",
                     "route": "true",
-                    "nombre": "Contratos de reaseguro",
+                    "nombre": "Simulaciones",
                     "modo": 1
                 }
             ]
