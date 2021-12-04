@@ -4,7 +4,10 @@
 export interface IQuestions {
     key: string,
     type: string,
-    length?: number,
+    min?: number,
+    max?: number,
+    minLength?: number,
+    maxLength?: number,
     order: number,
     label: string,
     value?: string,

@@ -8,7 +8,7 @@ export class Constants {
     /**
      * Minutos expiración cookies
      */
-    static timeExpireCookie: number = (2 / 1440);
+    static timeExpireCookie: number = (30 / 1440);
 
     /**
      * Llave privada crypto
