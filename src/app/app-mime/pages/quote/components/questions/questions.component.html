@@ -1,39 +1,29 @@
-<form [formGroup]="questionForm">
-    <p>questions works!</p>
-    <section *ngIf="questions">
-        <table>
-            <tbody>
-                <!--Recorre las preguntas-->
-                <tr *ngFor="let q of questions">
+<div [formGroup]="questionForm">
+    <!--Label-->
+    <td>{{ dynamicquestion.label }}</td>
 
-                    <!--Label-->
-                    <td>{{ q.label }}</td>
+    <!--Inputs-->
+    <td>
+        <!--Verifica si tiene opciones-->
+        <div *ngIf="dynamicquestion.options">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ dynamicquestion.label }}</mat-label>
+                <mat-select [id]="dynamicquestion.key" [value]="dynamicquestion.value"
+                    [formControlName]="dynamicquestion.key">
+                    <mat-option *ngFor="let opt of dynamicquestion.options" [value]="opt.key">
+                        {{ opt.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                    <!--Inputs-->
-                    <td>
-                        <!--Verifica si tiene opciones-->
-                        <div *ngIf="q.options">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{ q.label }}</mat-label>
-                                <mat-select [id]="q.key" [value]="q.value" [formControlName]="q.key">
-                                    <mat-option *ngFor="let opt of q.options" [value]="opt.key">
-                                        {{ opt.value }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                        <!--Verfica si no tiene opciones-->
-                        <div *ngIf="!q.options">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{ q.label }}</mat-label>
-                                <input matInput [id]="q.key" [value]="getValue(q)" [type]="q.type"
-                                    [formControlName]="q.key">
-                            </mat-form-field>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-</form>
+        <!--Verfica si no tiene opciones-->
+        <div *ngIf="!getOptions(dynamicquestion)">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ dynamicquestion.label }}</mat-label>
+                <input matInput [id]="dynamicquestion.key" [type]="dynamicquestion.type"
+                    [formControlName]="dynamicquestion.key">
+            </mat-form-field>
+        </div>
+    </td>
+</div>

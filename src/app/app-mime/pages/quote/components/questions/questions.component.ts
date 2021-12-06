@@ -9,26 +9,34 @@ import { IQuestions } from '../../interfaces/iquestions';
 export class QuestionsComponent implements OnInit, OnChanges {
 
   //Inputs Decorator
-  @Input() dynamicquestions: IQuestions[];
+  @Input() dynamicquestion: IQuestions;
   @Input() form: FormGroup;
 
   //Publics
   questionForm: FormGroup;
-  questions: IQuestions[];
 
   constructor(private _fb: FormBuilder) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.questionForm = this.form;
-    this.questions = (this.dynamicquestions) ? this.dynamicquestions : this.questions;
   }
 
   ngOnInit(): void {
   }
 
   getValue(q: IQuestions): string {
-    console.log("value", q);    
+    console.log(q);
     return q.value;
+  }
+
+  getOptions(q: IQuestions): boolean {
+    let ind = false;
+    Object.keys(q).forEach(key => {
+      if (key === "options") {
+        ind = true;
+      }
+    });
+    return ind;
   }
 }

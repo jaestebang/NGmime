@@ -4,7 +4,9 @@
         <ng-template matStepLabel>Datos Póliza</ng-template>
         <ng-template matStepContent>
             <p>This content was also rendered lazily</p>
-            <quote-questions [dynamicquestions]="questions" [form]="questionForm"></quote-questions>
+            <div *ngFor="let q of questions">
+                <quote-questions [dynamicquestion]="q" [form]="questionForm"></quote-questions>
+            </div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
         </ng-template>

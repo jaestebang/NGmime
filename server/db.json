@@ -70,12 +70,14 @@
             "key": 6031,
             "type": "date",
             "order": 1,
+            "value": "01/01/2021",
             "label": "Pregunta 6031",
             "required": "true"
         },
         {
             "key": 6032,
             "type": "date",
+            "value": "1",
             "order": 1,
             "label": "Pregunta 6032",
             "required": "true",
