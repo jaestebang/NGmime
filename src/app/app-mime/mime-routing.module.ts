@@ -5,7 +5,6 @@ import { AuthGuard } from '../guards/auth.guard';
 import { NotfoundComponent } from '../shared/components/notfound/notfound.component';
 import { SidenavComponent } from './menu/components/sidenav/sidenav.component';
 import { ProfileComponent } from './pages/config/components/profile/profile.component';
-import { BaseComponent } from './pages/quote/components/base/base.component';
 import { AuthComponent } from './user/components/auth/auth.component';
 
 const routes: Routes = [
@@ -27,7 +26,8 @@ const routes: Routes = [
       },
       {
         path: 'quote',
-        component: BaseComponent,
+        loadChildren: () => import('./pages/quote/quote.module').then(m => m.QuoteModule),
+        data: { preload : true },
         canActivate: [AuthGuard],
         outlet: 'snavoutlet'
       },

@@ -11,6 +11,14 @@ export class AuthService {
   constructor(private _cookie: CookieService, private _htpp: HttpClient) { }
 
   /**
+   * Inicializa
+   */
+  init() {
+    this._cookie.deleteAll();
+    localStorage.clear();
+  }
+
+  /**
    * Login
    * @param user  Usuario
    * @param pass  Contraseña

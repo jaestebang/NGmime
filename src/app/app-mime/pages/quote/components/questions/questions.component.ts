@@ -25,11 +25,6 @@ export class QuestionsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  getValue(q: IQuestions): string {
-    console.log(q);
-    return q.value;
-  }
-
   getOptions(q: IQuestions): boolean {
     let ind = false;
     Object.keys(q).forEach(key => {

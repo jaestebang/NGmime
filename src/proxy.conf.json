@@ -11,12 +11,18 @@
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {"^/questions" : ""}
-    },    
+    },
 
+    "/productsagents": {
+        "target": "http://localhost:3000/productsagents",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/productsagents" : ""}
+    },
     "/translate": {
         "target": "http://localhost:3000/translate",
         "secure": false,
         "changeOrigin": true,
-        "pathRewrite": {"^/menu" : ""}
+        "pathRewrite": {"^/translate" : ""}
     }
 }

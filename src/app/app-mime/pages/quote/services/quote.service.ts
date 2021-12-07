@@ -11,10 +11,11 @@ export class QuoteService {
   constructor(private _http: HttpClient) { }
 
   /**
-   * Get Questions
+   * Obtiene preguntas
+   * @returns Observable de tipo IQuestions[]
    */
   getQuestions(): Observable<IQuestions[]> {
-     console.log("Inicio getQuestions");
+     console.log("Inicio", this.getQuestions.name);
      
     return this._http.get<IQuestions[]>("/questions");
   }

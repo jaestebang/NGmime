@@ -23,6 +23,7 @@ export class AuthComponent implements OnInit {
     private _route: Router,
     private _snackBar: MatSnackBar
   ) {
+    this._aus.init();
     this.buildForm();
   }
 

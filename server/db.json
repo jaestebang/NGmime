@@ -92,5 +92,39 @@
                 }
             ]
         }
+    ],
+    "productsagents": [
+        {
+            "key": 9001,
+            "description": "Producto 9001",
+            "agents": [
+                {
+                    "key": 102030,
+                    "description": "Agente 102030"
+                },
+                {
+                    "key": 102031,
+                    "description": "Agente 102031"
+                },
+                {
+                    "key": 102032,
+                    "description": "Agente 102032"
+                }
+            ]
+        },
+        {
+            "key": 9002,
+            "description": "Producto 9001",
+            "agents": [
+                {
+                    "key": 102030,
+                    "description": "Agente 102030"
+                },
+                {
+                    "key": 102031,
+                    "description": "Agente 102031"
+                }
+            ]
+        }
     ]
 }
