@@ -1,6 +1,8 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 import { IQuestions } from '../../interfaces/iquestions';
 import { QuoteService } from '../../services/quote.service';
 
@@ -9,21 +11,44 @@ import { QuoteService } from '../../services/quote.service';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss']
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent extends MimebaseComponent implements OnInit {
   isLinear = true;
   questions: IQuestions[] = null;
   questionForm: FormGroup;
 
-  constructor(private _squote: QuoteService, private _fb: FormBuilder) {
+  /**
+   * Constructor
+   * @param _squote 
+   * @param _fb 
+   * @param _router 
+   * @param _ar 
+   */
+  constructor(private _squote: QuoteService,
+    private _fb: FormBuilder,
+    public _router: Router,
+    public _ar: ActivatedRoute,
+    public _spinner: NgxSpinnerService) {
+
+    //Inicializa base
+    super(_router, _ar, _spinner);
+
+    //Inicializa FormGroup
     this.questionForm = this._fb.group({ init: [''] });
   }
 
   ngOnInit(): void {
-    this._squote.getQuestions()
+    this.spinnerShow();
+ 
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinnerHide();
+      this._squote.getQuestions()
       .subscribe((q: IQuestions[]) => {
         this.questions = q;
         this.buildForm();
       });
+    }, 5000);
+
   }
 
   /**
@@ -68,4 +93,12 @@ export class BaseComponent implements OnInit {
     }
   }
 
+  onManagement() {
+
+    //Navegar a una ruta principal    
+    this.navigateByMimeRouting("profile");
+
+    //Se navega a la ruta, relativo a la posición actual
+    //this.navigate("management");
+  }
 }

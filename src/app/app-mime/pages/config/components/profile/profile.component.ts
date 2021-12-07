@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent extends MimebaseComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   constructor(private _snip: NgxSpinnerService) {
-    super();
   }
 
   ngOnInit(): void {

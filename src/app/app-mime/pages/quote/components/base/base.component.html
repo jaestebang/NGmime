@@ -1,4 +1,5 @@
 <p>base works!</p>
+<app-mimebase></app-mimebase>
 <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="questionForm">
         <ng-template matStepLabel>Datos Póliza</ng-template>
@@ -9,6 +10,7 @@
             </div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
+            <button mat-button (click)="onManagement()">Ir a management</button>
         </ng-template>
     </mat-step>
     <mat-step>

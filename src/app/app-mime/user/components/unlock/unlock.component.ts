@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './unlock.component.html',
   styleUrls: ['./unlock.component.scss']
 })
-export class UnlockComponent extends MimebaseComponent implements OnInit {
+export class UnlockComponent implements OnInit {
 
   form: FormGroup;
   private unsubscribe$: Subject<void> = new Subject<void>();
@@ -24,7 +24,6 @@ export class UnlockComponent extends MimebaseComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _dialogRef: MatDialogRef<UnlockComponent>
   ) {
-    super();
     this.buildForm();
   }
 
