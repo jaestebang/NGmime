@@ -11,7 +11,7 @@ import { Crypto } from '../global/crypto';
 export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
   private isLogged: Observable<boolean>;
-  constructor(private _route: Router, private _aus: AuthService) {
+  constructor(private _router: Router, private _aus: AuthService) {
 
   }
 
@@ -79,7 +79,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
       .subscribe({
         next: (value) => {
           ind = value;
-          if (!value) this._route.navigate(["auth"]);
+          if (!value) this._router.navigate(["auth"]);
         }
       }
     );
@@ -87,7 +87,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     //Valida si permite opción de menú
     ind = (ind && next.routeConfig.outlet === "snavoutlet") ? this.filterApp(next.routeConfig.path) : ind;
 
-    if (!ind) this._route.navigate(["auth"]);
+    if (!ind) this._router.navigate(["auth"]);
 
     return ind;
   }

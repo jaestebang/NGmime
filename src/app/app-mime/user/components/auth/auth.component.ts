@@ -20,7 +20,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _aus: AuthService,
-    private _route: Router,
+    private _router: Router,
     private _snackBar: MatSnackBar
   ) {
     this._aus.init();
@@ -52,7 +52,7 @@ export class AuthComponent implements OnInit {
         .subscribe({
           next: (value) => {
             if (value) {
-              this._route.navigate(['']);
+              this._router.navigate(['']);
               this._snackBar.open("Has iniciado sesión", "Hecho", { duration: 20000 });
             }
           }
