@@ -1,0 +1,45 @@
+/* Material */
+@import '../../../../../../assets/styles/mime/core/material/mime-material-theme.scss';
+
+.base-management {
+    display: flex;
+    font-size: 13px;
+
+    .management {
+        width: 60%;
+        border-right: 2px solid mat-color($mime-app-primary-light);
+    }
+
+    .questions {
+        padding-left: 10px;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+:Host ::ng-deep .questionForm>td {
+    width: 100%;
+    float: right;
+}
+
+:Host ::ng-deep .managementForm>td {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    grid-column-gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+:Host ::ng-deep .questions .mat-form-field {
+    width: 100%
+}
+
+:Host ::ng-deep .mat-form-field-infix {
+    padding: 0.4em 0;
+}
+
+:Host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0.5em;
+}

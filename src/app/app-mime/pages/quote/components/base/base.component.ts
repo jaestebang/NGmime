@@ -1,7 +1,10 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StepperOrientation } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map, Observable } from 'rxjs';
 import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 import { IQuestions } from '../../interfaces/iquestions';
 import { QuoteService } from '../../services/quote.service';
@@ -15,6 +18,8 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
   isLinear = true;
   questions: IQuestions[] = null;
   questionForm: FormGroup;
+  stepperOrientation: Observable<StepperOrientation>;
+  orientationValid: boolean;
 
   /**
    * Constructor
@@ -27,27 +32,41 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
     private _fb: FormBuilder,
     public _router: Router,
     public _ar: ActivatedRoute,
-    public _spinner: NgxSpinnerService) {
+    public _spinner: NgxSpinnerService,
+    private _breakpointObserver: BreakpointObserver) {
 
     //Inicializa base
     super(_router, _ar, _spinner);
 
+    //Orientación stepperOrientation
+    this.stepperOrientation = this._breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+
     //Inicializa FormGroup
     this.questionForm = this._fb.group({ init: [''] });
+
+    this._breakpointObserver.observe([
+      '(orientation: landscape)',
+    ]).subscribe((result) => {
+      this.orientationValid = result.matches;
+      if (result.matches) this.spinnerHide();
+      if (!result.matches) this.spinnerShow();
+    });
   }
 
   ngOnInit(): void {
     this.spinnerShow();
- 
+
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinnerHide();
       this._squote.getQuestions()
-      .subscribe((q: IQuestions[]) => {
-        this.questions = q;
-        this.buildForm();
-      });
-    }, 5000);
+        .subscribe((q: IQuestions[]) => {
+          this.questions = q;
+          this.buildForm();
+        });
+    }, 1000);
 
   }
 

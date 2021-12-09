@@ -1,41 +1,72 @@
-<p>base works!</p>
+<!--MimeBase Component-->
 <app-mimebase></app-mimebase>
-<mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="questionForm">
-        <ng-template matStepLabel>Datos Póliza</ng-template>
-        <ng-template matStepContent>
-            <p>This content was also rendered lazily</p>
-            <div *ngFor="let q of questions">
-                <quote-questions [dynamicquestion]="q" [form]="questionForm"></quote-questions>
-            </div>
+
+<!--Base Component-->
+<div class="base" [ngStyle]="{'visibility':orientationValid ? 'visible' : 'hidden'}">
+
+    <!--Stepper Base-->
+    <mat-stepper [linear]="isLinear" #stepper [orientation]="(stepperOrientation | async)!">
+
+        <!--Step Management & Questions-->
+        <mat-step [stepControl]="questionForm">
+            <ng-template matStepLabel>Datos Póliza</ng-template>
+            <ng-template matStepContent>
+                <p>This content was also rendered lazily</p>
+
+                <!-- Sección Base Management-->
+                <mat-card class="base-management">
+
+                    <!--Management-->
+                    <div class="management" color="primary">
+                        <quote-management></quote-management>
+                    </div>
+                    <!--Management-->
+
+                    <!--Questions-->
+                    <div class="questions">
+                        <div *ngFor="let q of questions">
+                            <quote-questions class="quest" [dynamicquestion]="q" [form]="questionForm">
+                            </quote-questions>
+                        </div>
+                    </div>
+                    <!--Questions-->
+
+                </mat-card>
+                <!-- Sección Base Management-->
+
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+                <button mat-button (click)="onManagement()">Ir a management</button>
+            </ng-template>
+        </mat-step>
+        <!--Step Management & Questions-->
+
+        <mat-step>
+            <ng-template matStepLabel>Terceros</ng-template>
+            <p>This content was rendered eagerly</p>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-            <button mat-button (click)="onManagement()">Ir a management</button>
-        </ng-template>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Terceros</ng-template>
-        <p>This content was rendered eagerly</p>
-        <button mat-button matStepperPrevious>Back</button>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Riesgo</ng-template>
-        <p>This content was rendered eagerly</p>
-        <button mat-button matStepperPrevious>Back</button>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Datos Riesgo</ng-template>
-        <p>This content was rendered eagerly</p>
-        <button mat-button matStepperPrevious>Back</button>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Coberturas</ng-template>
-        <p>This content was rendered eagerly</p>
-        <button mat-button matStepperPrevious>Back</button>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Detalle Coberturas</ng-template>
-        <p>This content was rendered eagerly</p>
-        <button mat-button matStepperPrevious>Back</button>
-    </mat-step>
-</mat-stepper>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Riesgo</ng-template>
+            <p>This content was rendered eagerly</p>
+            <button mat-button matStepperPrevious>Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Datos Riesgo</ng-template>
+            <p>This content was rendered eagerly</p>
+            <button mat-button matStepperPrevious>Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Coberturas</ng-template>
+            <p>This content was rendered eagerly</p>
+            <button mat-button matStepperPrevious>Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Detalle Coberturas</ng-template>
+            <p>This content was rendered eagerly</p>
+            <button mat-button matStepperPrevious>Back</button>
+        </mat-step>
+    </mat-stepper>
+    <!--Stepper Base-->
+
+</div>
