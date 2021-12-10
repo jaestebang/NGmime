@@ -19,7 +19,7 @@ export class QuestionsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.questionForm = this.form;
+    this.questionForm = this.form;    
   }
 
   ngOnInit(): void {

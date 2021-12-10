@@ -2,30 +2,30 @@
 <app-mimebase></app-mimebase>
 
 <!--Base Component-->
-<div class="base" [ngStyle]="{'visibility':orientationValid ? 'visible' : 'hidden'}">
+<div class="base" [ngStyle]="{'visibility':orientationValid ? 'visible' : 'hidden'}" *ngIf="quote != null">
 
     <!--Stepper Base-->
     <mat-stepper [linear]="isLinear" #stepper [orientation]="(stepperOrientation | async)!">
 
         <!--Step Management & Questions-->
-        <mat-step [stepControl]="questionForm">
+        <mat-step [stepControl]="managementForm">
             <ng-template matStepLabel>Datos Póliza</ng-template>
             <ng-template matStepContent>
                 <p>This content was also rendered lazily</p>
 
                 <!-- Sección Base Management-->
-                <mat-card class="base-management">
+                <mat-card class="base-data">
 
                     <!--Management-->
-                    <div class="management" color="primary">
+                    <div class="data">
                         <quote-management></quote-management>
                     </div>
                     <!--Management-->
 
                     <!--Questions-->
                     <div class="questions">
-                        <div *ngFor="let q of questions">
-                            <quote-questions class="quest" [dynamicquestion]="q" [form]="questionForm">
+                        <div *ngFor="let q of quote.questions">
+                            <quote-questions class="quest" [dynamicquestion]="q" [form]="managementForm">
                             </quote-questions>
                         </div>
                     </div>
@@ -41,26 +41,74 @@
         </mat-step>
         <!--Step Management & Questions-->
 
+        <!--Step Persons-->
         <mat-step>
             <ng-template matStepLabel>Terceros</ng-template>
             <p>This content was rendered eagerly</p>
             <button mat-button matStepperPrevious>Back</button>
         </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Riesgo</ng-template>
-            <p>This content was rendered eagerly</p>
+        <!--Step Persons-->
+
+        <!--Step Risk & Questions-->
+        <mat-step [stepControl]="riskForm">
+            <ng-template matStepLabel>Riesgos</ng-template>
+            <p>This content was rendered lazily</p>
+            <ng-template matStepContent>
+
+                <!-- Sección Base Risk-->
+                <mat-card class="base-data">
+
+                    <!--Risk-->
+                    <div class="data">
+                        <quote-risk></quote-risk>
+                    </div>
+                    <!--Risk-->
+
+                    <!--Questions-->
+                    <div class="questions">
+                        <div *ngFor="let q of quote.risk.questions">
+                            <quote-questions id="questRisk" class="quest" [dynamicquestion]="q" [form]="riskForm">
+                            </quote-questions>
+                        </div>
+                    </div>
+                    <!--Questions-->
+
+                </mat-card>
+                <!-- Sección Base Risk-->
+
+            </ng-template>
             <button mat-button matStepperPrevious>Back</button>
         </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Datos Riesgo</ng-template>
-            <p>This content was rendered eagerly</p>
-            <button mat-button matStepperPrevious>Back</button>
-        </mat-step>
+        <!--Step Risk-->
+
+        <!--Coverages-->
         <mat-step>
             <ng-template matStepLabel>Coberturas</ng-template>
-            <p>This content was rendered eagerly</p>
+            <p>This content was rendered lazily</p>
+            <ng-template matStepContent>
+
+                <!-- Sección Base Coverages-->
+                <mat-card class="base-data">
+
+                    <!--Coverages-->
+                    <div class="data">
+                        <quote-coverages [dynamiccoverages]="quote.risk.coverages"></quote-coverages>
+                    </div>
+                    <!--Coverages-->
+
+                    <!--Questions-->
+                    <div class="questions">
+                    </div>
+                    <!--Questions-->
+
+                </mat-card>
+                <!-- Sección Base Coverages-->
+
+            </ng-template>
             <button mat-button matStepperPrevious>Back</button>
         </mat-step>
+        <!--Step Coverages-->
+
         <mat-step>
             <ng-template matStepLabel>Detalle Coberturas</ng-template>
             <p>This content was rendered eagerly</p>

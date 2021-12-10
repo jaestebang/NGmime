@@ -7,6 +7,9 @@ import { QuestionsComponent } from './components/questions/questions.component';
 import { RiskComponent } from './components/risk/risk.component';
 import { ProviderQuoteService } from './services/provider-quote.service';
 import { QuoteRoutingModule } from './quote-routing.module';
+import { AddresComponent } from './components/addres/addres.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { CoveragesComponent } from './components/coverages/coverages.component';
 
 /**
  * Inicializa parámetros al cargar el módulo
@@ -19,7 +22,7 @@ export function initProviderFactory(provider: ProviderQuoteService) {
 }
 
 @NgModule({
-  declarations: [QuestionsComponent, BaseComponent, ManagementComponent, RiskComponent],
+  declarations: [QuestionsComponent, BaseComponent, ManagementComponent, RiskComponent, AddresComponent, VehicleComponent, CoveragesComponent],
   imports: [
     CommonModule,
     SharedFormsModule,

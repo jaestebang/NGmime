@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map, Observable } from 'rxjs';
 import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
 import { IQuestions } from '../../interfaces/iquestions';
+import { IQuote } from '../../interfaces/iquote';
 import { QuoteService } from '../../services/quote.service';
 
 @Component({
@@ -16,8 +17,9 @@ import { QuoteService } from '../../services/quote.service';
 })
 export class BaseComponent extends MimebaseComponent implements OnInit {
   isLinear = true;
-  questions: IQuestions[] = null;
-  questionForm: FormGroup;
+  quote: IQuote;
+  managementForm: FormGroup;
+  riskForm: FormGroup;
   stepperOrientation: Observable<StepperOrientation>;
   orientationValid: boolean;
 
@@ -44,8 +46,10 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
     //Inicializa FormGroup
-    this.questionForm = this._fb.group({ init: [''] });
+    this.managementForm = this._fb.group({ init: [''] });
+    this.riskForm = this._fb.group({ init: [''] });
 
+    //Orientación de la pantalla
     this._breakpointObserver.observe([
       '(orientation: landscape)',
     ]).subscribe((result) => {
@@ -55,28 +59,43 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
     });
   }
 
+  /**
+   * Init
+   */
   ngOnInit(): void {
+    this.getData();
+  }
+
+  /**
+   * Obtiene datos
+   */
+  getData(): void{
     this.spinnerShow();
-
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
       this.spinnerHide();
-      this._squote.getQuestions()
-        .subscribe((q: IQuestions[]) => {
-          this.questions = q;
-          this.buildForm();
-        });
-    }, 1000);
 
+      //Obtiene base de cotización
+      this._squote.getQuote()
+        .subscribe((quote: IQuote) => {
+          this.quote = quote;
+          console.log("Quote", this.quote);
+
+          //Compilamos Forms
+          this.buildForm(quote.questions, this.managementForm);
+          this.buildForm(quote.risk.questions, this.riskForm);
+
+        });
+
+    }, 0);
   }
 
   /**
    Compilamos los controles recibidos en this.questions y adicionamos a questionForm
    */
-  private buildForm() {
+  private buildForm(quest: IQuestions[], formQuestion: FormGroup) {
     try {
-      if (this.questions) {
-        this.questions.forEach(q => {
+      if (quest) {
+        quest.forEach(q => {
 
           //Obtenemos un nuevo control desde el FormBuilder
           let c: AbstractControl = this._fb.control('');
@@ -104,7 +123,7 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
           c.updateValueAndValidity();
 
           //Adicionamos el control al FormGroup
-          this.questionForm.addControl(q.key, c);
+          formQuestion.addControl(q.key, c);
         });
       }
     } catch (e) {

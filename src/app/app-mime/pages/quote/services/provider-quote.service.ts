@@ -18,7 +18,10 @@ export class ProviderQuoteService {
   constructor(private _http: HttpClient, private _aus: AuthService) { }
 
   /**
-   * Inicaliza prámetros
+   * Inicaliza prámetros: 
+   * Productos - Agentes
+   * Direcciones - Ubicaciones
+   * Datos de vehículo
    */
   initParameters() {
 

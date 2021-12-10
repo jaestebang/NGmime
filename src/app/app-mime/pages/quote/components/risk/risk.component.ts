@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-risk',
+  selector: 'quote-risk',
   templateUrl: './risk.component.html',
   styleUrls: ['./risk.component.scss']
 })
