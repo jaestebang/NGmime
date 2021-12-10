@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
 
@@ -27,7 +28,7 @@ export class MenuItemsComponent implements OnInit {
   //Variables clase
   expanded: boolean;
 
-  constructor(private _snav: SidenavService) {
+  constructor(private _snav: SidenavService, private _ar : ActivatedRoute) {
 
     //Se inicializa si no está definida
     if (this.idx === undefined || this.idx === null) this.idx = 0;

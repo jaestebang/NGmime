@@ -2,6 +2,9 @@
     "menu": [
         {
             "codigo": "dashboard",
+            "params": [
+                "dashboard"
+            ],
             "nombre": "Dashboard",
             "route": "true",
             "icon": "dashboard"
@@ -13,12 +16,18 @@
             "app": [
                 {
                     "codigo": "auth",
+                    "params": [
+                        "auth"
+                    ],
                     "route": "true",
                     "nombre": "Iniciar sesión",
                     "modo": 1
                 },
                 {
                     "codigo": "profile",
+                    "params": [
+                        "profile"
+                    ],
                     "route": "true",
                     "nombre": "Perfil de usuario",
                     "modo": 1
@@ -29,12 +38,18 @@
                     "app": [
                         {
                             "codigo": "procesos",
+                            "params": [
+                                "procesos"
+                            ],
                             "route": "true",
                             "nombre": "Configuración de procesos",
                             "modo": 1
                         },
                         {
                             "codigo": "notifi",
+                            "params": [
+                                "notifi"
+                            ],
                             "route": "true",
                             "nombre": "Notificaciones",
                             "modo": 1
@@ -49,7 +64,11 @@
             "icon": "request_quote",
             "app": [
                 {
-                    "codigo": "quote",
+                    "codigo": "quote_emit",
+                    "params": [
+                        "quote",
+                        "emit"
+                    ],
                     "route": "true",
                     "nombre": "Simulaciones",
                     "modo": 1
@@ -57,42 +76,86 @@
             ]
         }
     ],
-    "questions": [
-        {
-            "key": 6030,
-            "type": "number",
-            "order": 1,
-            "label": "Pregunta 6030",
-            "value": 10,
-            "required": "true"
-        },
-        {
-            "key": 6031,
-            "type": "date",
-            "order": 1,
-            "value": "01/01/2021",
-            "label": "Pregunta 6031",
-            "required": "true"
-        },
-        {
-            "key": 6032,
-            "type": "date",
-            "value": "1",
-            "order": 1,
-            "label": "Pregunta 6032",
-            "required": "true",
-            "options": [
+    "quote": {
+        "risk": {
+            "key": 1,
+            "type": 0,
+            "questions": [
                 {
-                    "key": "1",
-                    "value": "rojo"
+                    "key": 9901,
+                    "type": "date",
+                    "order": 1,
+                    "value": "01/06/2021",
+                    "label": "Pregunta 9901",
+                    "required": "true"
                 },
                 {
-                    "key": "2",
-                    "value": "amarillo"
+                    "key": 9902,
+                    "type": "date",
+                    "value": "1",
+                    "order": 1,
+                    "label": "Pregunta 6032",
+                    "required": "true",
+                    "options": [
+                        {
+                            "key": "1",
+                            "value": "Dinámico"
+                        },
+                        {
+                            "key": "2",
+                            "value": "Estático"
+                        }
+                    ]
+                }
+            ],
+            "coverages": [
+                {
+                    "key": "6030",
+                    "description": "Cobertura 6030"
+                },
+                {
+                    "key": "6031",
+                    "description": "Cobertura 6031"
                 }
             ]
-        }
-    ],
+        },
+        "questions": [
+            {
+                "key": 6030,
+                "type": "number",
+                "order": 1,
+                "label": "Pregunta 6030",
+                "value": 10,
+                "required": "true"
+            },
+            {
+                "key": 6031,
+                "type": "date",
+                "order": 1,
+                "value": "01/01/2021",
+                "label": "Pregunta 6031",
+                "required": "true"
+            },
+            {
+                "key": 6032,
+                "type": "date",
+                "value": "1",
+                "order": 1,
+                "label": "Pregunta 6032",
+                "required": "true",
+                "options": [
+                    {
+                        "key": "1",
+                        "value": "rojo"
+                    },
+                    {
+                        "key": "2",
+                        "value": "amarillo"
+                    }
+                ]
+            }
+        ]
+    },
     "productsagents": [
         {
             "key": 9001,

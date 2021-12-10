@@ -29,10 +29,6 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     //Filtra en las opciones
     if (!(m === undefined || m === null)) {
-      /* for (let i: number = 0; i < menu.length; ++i){
-         let menu_i = menu[i];
-       }*/
-
       try {
         menu.forEach((aom => {
           if (ind) return ind;
@@ -40,17 +36,22 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           //Busca la aplicación
           if (!(aom.app === undefined || aom.app === null)) {
             aom.app.map(function mapper(s) {
-              if (Array.isArray(s)) {
-                return s.map(mapper);
+              if (ind) return;
+              if (!(s.app === undefined || s.app === null)) {
+                return s.app.map(mapper);
               } else {
-                if (s.codigo === cod) ind = true;
+                if (s.params !== undefined && s.params !== null) {
+                  ind = s.params.includes(cod);
+                }
               }
             });
           } else if (aom.route) {
-            if (aom.codigo === cod) ind = true;
+            if (!(aom === undefined || aom === null))
+              ind = aom.params.includes(cod);
           }
 
         }));
+
       } catch (e) {
         console.log("error", e);
       }
@@ -82,13 +83,10 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           if (!value) this._router.navigate(["auth"]);
         }
       }
-    );
-    
+      );
+
     //Valida si permite opción de menú
-    ind = (ind && next.routeConfig.outlet === "snavoutlet") ? this.filterApp(next.routeConfig.path) : ind;
-
-    if (!ind) this._router.navigate(["auth"]);
-
+    ind = (ind && !next.routeConfig.path.includes('mime')) ? this.filterApp(next.routeConfig.path) : ind;
     return ind;
   }
 
@@ -108,3 +106,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
   }
 
 }
+function paramsIncludeApp(cod: string, s: ISidenav) {
+  throw new Error('Function not implemented.');
+}
+

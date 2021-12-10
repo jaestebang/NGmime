@@ -6,7 +6,7 @@ import { ManagementComponent } from './components/management/management.componen
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'emit',
     component: BaseComponent,
     canActivate: [AuthGuard]
   },

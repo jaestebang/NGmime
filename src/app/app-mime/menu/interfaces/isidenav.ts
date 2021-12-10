@@ -6,6 +6,7 @@ import { EOperation } from '../../../core/enum/enum-mime';
 export interface ISidenav {
     codigo: string,
     nombre: string,
+    params?: string[],
     route?: boolean,
     icon?: boolean,
     modo?: EOperation,
