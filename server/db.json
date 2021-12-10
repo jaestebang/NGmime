@@ -67,7 +67,8 @@
                     "codigo": "quote_emit",
                     "params": [
                         "quote",
-                        "emit"
+                        "emit",
+                        "1"
                     ],
                     "route": "true",
                     "nombre": "Simulaciones",

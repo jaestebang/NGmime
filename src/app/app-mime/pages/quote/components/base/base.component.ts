@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StepperOrientation } from '@angular/material/stepper';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map, Observable } from 'rxjs';
 import { MimebaseComponent } from 'src/app/shared/components/mimebase/mimebase.component';
@@ -64,6 +64,7 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getData();
+    console.log("id", this._ar.snapshot.paramMap.get('id'))
   }
 
   /**

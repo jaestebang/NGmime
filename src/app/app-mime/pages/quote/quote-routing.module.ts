@@ -11,6 +11,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'emit/:id',
+    component: BaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'management',
     component: ManagementComponent,
     canActivate: [AuthGuard]

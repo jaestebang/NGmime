@@ -86,7 +86,9 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
       );
 
     //Valida si permite opción de menú
-    ind = (ind && !next.routeConfig.path.includes('mime')) ? this.filterApp(next.routeConfig.path) : ind;
+    const PATH: String[] = next.routeConfig.path.toString().split("/");        
+    ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
+    
     return ind;
   }
 
