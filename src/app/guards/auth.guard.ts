@@ -58,7 +58,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
       //Si no está la opción no permite ingreso
       if (!ind) {
-        alert("No tiene acceso a esta opción");
+        this._router.navigate(["forbidden"]);
       }
     }
     return ind;
@@ -82,13 +82,11 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           ind = value;
           if (!value) this._router.navigate(["auth"]);
         }
-      }
-      );
+      });
 
     //Valida si permite opción de menú
-    const PATH: String[] = next.routeConfig.path.toString().split("/");        
+    const PATH: String[] = next.routeConfig.path.toString().split("/");
     ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
-    
     return ind;
   }
 
@@ -108,7 +106,3 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
   }
 
 }
-function paramsIncludeApp(cod: string, s: ISidenav) {
-  throw new Error('Function not implemented.');
-}
-
