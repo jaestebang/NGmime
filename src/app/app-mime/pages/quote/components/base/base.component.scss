@@ -6,7 +6,7 @@
 
     .data {
         width: 70%;
-        border-right: 2px solid mat-color($mime-app-primary);
+        border-right: 1px solid map-get($map: $fg_color, $key: divider);
     }
 
     .questions {
@@ -29,11 +29,9 @@
     }
     .mat-header-cell{
         font-size: inherit;
-        color: white;
     }
     .mat-header-row{
         height: 30px;
-        background-color: mat-color($mime-app-accent);
     }
     .mat-row{
         height: 25px;
