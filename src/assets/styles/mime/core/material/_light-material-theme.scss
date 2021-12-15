@@ -1,0 +1,34 @@
+@use '~@angular/material'as mat;
+
+@include mat.core();
+
+/*Colors Define*/
+$mime-app-primary: mat.define-palette(mat.$indigo-palette, 500);
+$mime-app-accent: mat.define-palette(mat.$light-blue-palette, 600);
+$mime-app-warn: mat.define-palette(mat.$red-palette, A700);
+
+/*Theme Define*/
+$mime-light-theme: mat.define-light-theme((color: (primary: $mime-app-primary,
+      accent: $mime-app-accent, warn: $mime-app-warn)));
+
+/*Background Define*/
+@function mat-set-background($theme, $backgroundColor) {
+  $palette-color: map-get($theme, color);
+  $background: map-get($palette-color, background);
+  $background: map_merge($background, (hover: $backgroundColor));
+  $background: map_merge($background, (divider: $backgroundColor));
+  $background: map_merge($background, (dividers: $backgroundColor));
+  $palette-color: map_merge($palette-color, (background: $background));
+  @return map_merge($theme, (color: $palette-color));
+}
+
+/*Set Background*/
+$mime-light-theme: mat-set-background($mime-light-theme, map-get(mat.$indigo-palette, 100));
+
+/*Set Angular material - All components*/
+@include angular-material-theme($mime-light-theme);
+
+/*Class CSS Light Theme*/
+.mime-light-theme {
+  @include angular-material-theme($mime-light-theme);
+}

@@ -19,8 +19,9 @@
 
         <ng-template #app>
             <a mat-list-item class="menu-link" [ngStyle]="{'padding-left': (idx * 0) + 'px'}"
-                (click)="onItemSelected(menuitem)" [ngClass]="{'active': menuitem.route ? true: false}"
-                [routerLink]="[{ outlets: { snavoutlet: menuitem.params } }]">
+                (click)="onItemSelected(menuitem)"
+                [routerLink]="[{ outlets: { snavoutlet: menuitem.params } }]"
+                [routerLinkActive]="['is-active']">
 
                 <!--Nombre: aplicación -->
                 <mat-icon>{{menuitem.icon}}</mat-icon>
