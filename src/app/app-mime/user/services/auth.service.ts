@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Constants } from 'src/app/global/constants';
@@ -8,7 +9,9 @@ import { Constants } from 'src/app/global/constants';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private _cookie: CookieService, private _htpp: HttpClient) { }
+  constructor(private _cookie: CookieService,
+    private _htpp: HttpClient,
+    private _translateService: TranslateService) { }
 
   /**
    * Inicializa
@@ -24,7 +27,7 @@ export class AuthService {
    * @param pass  Contraseña
    * @param reset Reinicia cookies - storage
    */
-  login(user: string, pass: string, reset: boolean = true): Observable<boolean> {    
+  login(user: string, pass: string, reset: boolean = true): Observable<boolean> {
 
     //Liberamos todas las cookies - storage
     if (reset) {
@@ -45,6 +48,9 @@ export class AuthService {
 
     //Registra la cookie con el token de sesión
     this._cookie.set("token", pass, Constants.timeExpireCookie, "/");
+
+    //Registra el idioma de acuerdo a la configuración de usuario
+    this._translateService.use('es');
 
     //Retorna si está logueado
     return this.isLogged$();
