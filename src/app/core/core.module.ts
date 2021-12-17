@@ -9,7 +9,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CustomTranslateService } from './translate/customtranslate.service';
 
-
+/**
+ * Obtiene las traducciones cargadas localmente: assets/i18n
+ * @param http HttpClient
+ * @returns TranslateHttpLoader
+ */
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -19,9 +23,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'es',
       loader: {
         provide: TranslateLoader,
-        useClass: CustomTranslateService,
+        useFactory: (HttpLoaderFactory), /* useClass: CustomTranslateService */
         deps: [HttpClient]
       }
     })
