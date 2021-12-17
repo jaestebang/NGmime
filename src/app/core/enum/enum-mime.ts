@@ -10,7 +10,7 @@ export enum EOperation {
 /**
  * Sexo
  */
-export enum ESexo {
+export enum ESex {
     masculino = 1,
     femenino = 2
 }
@@ -18,6 +18,6 @@ export enum ESexo {
 /**
  * Roles de navegación
  */
-export enum ERol{
+export enum ERole{
     admin = 0
 }
