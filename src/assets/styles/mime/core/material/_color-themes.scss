@@ -1,0 +1,41 @@
+/*Themes definition*/
+$themes: (dark: (palette-color : $dark-palette-color,
+        bg-color : $dark-bg-color,
+        fg-color : $dark-fg-color,
+        primary-color : $dark-primary-color,
+        accent-color : $dark-accent-color,
+        warn-color : $dark-warn-color,
+    ),
+    light: (palette-color : $palette-color,
+        bg-color : $bg-color,
+        fg-color : $fg-color,
+        primary-color : $primary-color,
+        accent-color : $accent-color,
+        warn-color : $warn-color,
+    ),
+);
+
+/* Set themes in map */
+@mixin mime-themes() {
+
+    @each $theme,
+    $map in $themes {
+        .theme-#{$theme} & {
+            $theme-map: () !global;
+
+            @each $key,
+            $submap in $map {
+                $value: map-get(map-get($themes, $theme), '#{$key}');
+                $theme-map: map-merge($theme-map, ($key: $value)) !global;
+            }
+
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+/* Get variable of theme*/
+@function get($key) {
+    @return map-get($theme-map, $key);
+}

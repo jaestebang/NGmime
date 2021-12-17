@@ -30,6 +30,13 @@ export class MimebaseComponent implements OnInit {
     this._router.navigate([route], { relativeTo: this._ar });
   }
 
+  /**
+   * Retorna el tema aplicado al componente principal
+   * @returns Theme: light - dark
+   */
+  getMimeTheme(): string {
+    return document.getElementById('mime-container').classList.contains('mime-dark-theme') ? 'theme-dark' : 'theme-light'
+  }
 
   /**
    * Show NgxSpinner

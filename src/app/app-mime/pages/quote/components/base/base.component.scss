@@ -6,7 +6,10 @@
 
     .data {
         width: 70%;
-        border-right: 1px solid map-get($map: $fg_color, $key: divider);
+        @include mime-themes() {
+            border-right: 1px solid;
+            border-color: map-get($map: get('fg-color'), $key: divider);
+        }
     }
 
     .questions {
@@ -17,23 +20,28 @@
     }
 }
 
-:Host ::ng-deep .coverageForm{
-    div{
+:Host ::ng-deep .coverageForm {
+    div {
         width: 100%;
     }
-    table{
+
+    table {
         width: 95%;
     }
-    .mat-cell{ 
+
+    .mat-cell {
         font-size: inherit;
     }
-    .mat-header-cell{
+
+    .mat-header-cell {
         font-size: inherit;
     }
-    .mat-header-row{
+
+    .mat-header-row {
         height: 30px;
     }
-    .mat-row{
+
+    .mat-row {
         height: 25px;
     }
 }

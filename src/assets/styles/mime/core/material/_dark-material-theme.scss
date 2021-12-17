@@ -23,18 +23,27 @@ $mime-dark-theme: mat.define-dark-theme((color: (primary: $mime-dark-app-primary
 /*Set Background*/
 //$mime-dark-theme: mat-set-background($mime-dark-theme, map-get(mat.$indigo-palette, 100));
 
+/*Colors Define*/
+$dark-palette-color: map-get($map: $mime-dark-theme, $key: color);
+$dark-bg-color: map-get($map: $dark-palette-color, $key: background);
+$dark-fg-color: map-get($map: $dark-palette-color, $key: foreground);
+$dark-primary-color: $mime-dark-app-primary;
+$dark-accent-color: $mime-dark-app-accent;
+$dark-warn-color: $mime-dark-app-warn;
+
+@mixin define-theme($theme) {
   /*Colors Define*/
-  $dark-palette-color: map-get($map: $mime-dark-theme, $key: color);
-  $dark-bg-color: map-get($map: $dark-palette-color, $key: background);
-  $dark-fg-color: map-get($map: $dark-palette-color, $key: foreground);
-  $dark-primary-color: $mime-dark-app-primary;
-  $dark-accent-color: $mime-dark-app-accent;
-  $dark-warn-color: $mime-dark-app-warn;
+  $palette-color: map-get($map: $theme, $key: color);
+  $bg-color: map-get($map: $palette-color, $key: background);
+  $fg-color: map-get($map: $palette-color, $key: foreground);
+  $primary-color: map-get($map: $palette-color, $key: primary);
+}
 
 
 /*Class CSS Dark Theme*/
 .mime-dark-theme {
   @include angular-material-theme($mime-dark-theme);
+  @include define-theme($mime-dark-theme);
 
   .mat-stepper-horizontal,
   .mat-stepper-vertical {

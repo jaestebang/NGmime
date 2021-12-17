@@ -2,7 +2,8 @@
 <app-mimebase></app-mimebase>
 
 <!--Base Component-->
-<div class="base" [ngStyle]="{'visibility':orientationValid ? 'visible' : 'hidden'}" *ngIf="quote != null">
+<div class="base" [ngClass]="getMimeTheme()" [ngStyle]="{'visibility':orientationValid ? 'visible' : 'hidden'}"
+    *ngIf="quote != null">
 
     <!--Stepper Base-->
     <mat-stepper [linear]="isLinear" #stepper [orientation]="(stepperOrientation | async)!">
