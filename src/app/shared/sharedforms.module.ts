@@ -5,6 +5,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { MimebaseComponent } from './components/mimebase/mimebase.component';
 import { ErrorComponent } from './components/error/error.component';
 import { MaterialModule } from './material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MaterialModule } from './material.module';
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -26,7 +28,8 @@ import { MaterialModule } from './material.module';
     MaterialModule,
     ErrorComponent,
     MimebaseComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule
   ]
 })
   
