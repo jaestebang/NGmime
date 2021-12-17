@@ -1,13 +1,13 @@
-import { ESexo, ERol } from '../../../core/enum/enum-mime';
+import { ESex, ERole } from '../../../core/enum/enum-mime';
 
 /**
  * Interfaz de usuario
  */
 export interface IUser{
     user: string,
-    nombre: string,
-    sexo: ESexo,
+    name: string,
+    sex: ESex,
     email: string,
-    idioma: string,
-    rol:  ERol
+    idiom: string,
+    role:  ERole
 }
