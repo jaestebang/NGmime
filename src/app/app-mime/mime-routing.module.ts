@@ -27,7 +27,6 @@ const routes: Routes = [
       {
         path: 'quote',
         loadChildren: () => import('./pages/quote/quote.module').then(m => m.QuoteModule),
-        data: { preload: true },
         canActivate: [AuthGuard],
         outlet: 'snavoutlet'
       },

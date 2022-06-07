@@ -17,47 +17,47 @@ import { SidenavService } from '../../services/sidenav.service';
 })
 export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  //Variables privadas
+  // Variables privadas
   private unsubscribe$: Subject<void> = new Subject<void>();
   private unlock$: AsyncSubject<boolean> = new AsyncSubject<boolean>();
 
-  //ViewChild
-  @ViewChild("snav") private snavElement: MatSidenav;
+  // ViewChild
+  @ViewChild('snav') private snavElement: MatSidenav;
 
-  //Variables públicas
+  // Variables públicas
   menu: ISidenav[] = null;
-  title: string = "MIME Insurance";
+  title: string = 'MIME Insurance';
   mobileQuery: MediaQueryList;
   darkTheme: boolean;
 
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
   constructor(
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _media: MediaMatcher,
-    private _snav: SidenavService,
-    private _aus: AuthService,
-    private _mdialog: MatDialog
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
+    private snav: SidenavService,
+    private aus: AuthService,
+    private mdialog: MatDialog
   ) {
 
-    //Aspectos en Mobile
-    this.mobileQuery = _media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => _changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    // Aspectos en Mobile
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
   }
 
   /**
    * Inicializa views
    */
   ngAfterViewInit(): void {
-    this._snav.setSnavElement(this.snavElement);
+    this.snav.setSnavElement(this.snavElement);
   }
 
   /**
    * Destruye componente
    */
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
     this.unlock$.complete();
@@ -76,13 +76,13 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   isLogged(): boolean {
     let indLogged: boolean;
-    this._aus.isLogged$()
+    this.aus.isLogged$()
       .subscribe({
         next: (value: boolean) => {
           indLogged = value;
           if (!value) {
 
-            //Emite un valor
+            // Emite un valor
             this.unlock$.next(true);
             this.unlock$.complete();
           }
@@ -109,19 +109,19 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
    * Abre modal Unlock
    */
   unlock() {
-    console.log("Unlock");
+    console.log('Unlock');
 
     this.menu = null;
-    const dialogUnlock = this._mdialog.open(UnlockComponent, { disableClose: true });
+    const dialogUnlock = this.mdialog.open(UnlockComponent, { disableClose: true });
 
-    //Subscribe a la acción
+    // Subscribe a la acción
     dialogUnlock.afterClosed()
       .subscribe((result) => {
-        
-        //Obtener menú
+
+        // Obtener menú
         this.getMenu();
 
-        //Inicializar AsyncSubject
+        // Inicializar AsyncSubject
         this.unlock$ = new AsyncSubject();
         this.initSubject();
       });
@@ -131,24 +131,23 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
    * Obtiene el menú de la aplicación
    */
   getMenu(): void {
-    console.log("getMENU");
 
-    //Obtiene menú localstorage
-    const m: string = Crypto.decryptAES(localStorage.getItem("menu"));
+    // Obtiene menú localstorage
+    const m: string = Crypto.decryptAES(localStorage.getItem('menu'));
     this.menu = (m === undefined || m === null) ? null : <ISidenav[]>JSON.parse(m);
 
     if (this.menu === undefined || this.menu === null) {
 
-      //Suscribe para obtener el menú
-      this._snav.getMenuSidenav()
+      // Suscribe para obtener el menú
+      this.snav.getMenuSidenav()
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((m: ISidenav[]) => {
+        .subscribe((menu: ISidenav[]) => {
 
-          //Guardar menú localstorage
-          localStorage.setItem("menu", Crypto.encryptAES(JSON.stringify(m)));
+          // Guardar menú localstorage
+          localStorage.setItem('menu', Crypto.encryptAES(JSON.stringify(m)));
 
-          //Asigna menú
-          this.menu = m;
+          // Asigna menú
+          this.menu = menu;
         });
     }
   }

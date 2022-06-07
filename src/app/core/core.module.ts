@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 /**
@@ -11,10 +11,11 @@ import { CustomTranslateService } from './translate/customtranslate.service';
 
 /**
  * Obtiene las traducciones cargadas localmente: assets/i18n
- * @param http HttpClient
+ * @param handler HttpBackend
  * @returns TranslateHttpLoader
  */
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(handler: HttpBackend) {
+  const http = new HttpClient(handler);
   return new TranslateHttpLoader(http);
 }
 
@@ -23,11 +24,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'es',
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: (HttpLoaderFactory), /* useClass: CustomTranslateService */
-        deps: [HttpClient]
+        deps: [HttpBackend]
       }
     })
   ],

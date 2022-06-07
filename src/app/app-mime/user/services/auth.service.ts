@@ -9,15 +9,17 @@ import { Constants } from 'src/app/global/constants';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private _cookie: CookieService,
-    private _htpp: HttpClient,
-    private _translateService: TranslateService) { }
+  constructor(
+    private cookie: CookieService,
+    private htpp: HttpClient,
+    private translateService: TranslateService
+  ) { }
 
   /**
    * Inicializa
    */
   init() {
-    this._cookie.deleteAll();
+    this.cookie.deleteAll();
     localStorage.clear();
   }
 
@@ -29,30 +31,30 @@ export class AuthService {
    */
   login(user: string, pass: string, reset: boolean = true): Observable<boolean> {
 
-    //Liberamos todas las cookies - storage
+    // Liberamos todas las cookies - storage
     if (reset) {
-      this._cookie.deleteAll();
+      this.cookie.deleteAll();
       localStorage.clear();
     }
 
-    //Aquí se debe realizar el llamado al endopoint
+    // Aquí se debe realizar el llamado al endopoint
 
     /*
-    this._htpp.post("", "")
+    this._htpp.post('', '')
       .subscribe(
         data => console.log(data),
         err => (console.log(err)),
-        () => console.log("Petición finalizada")
+        () => console.log('Petición finalizada')
       );
       */
 
-    //Registra la cookie con el token de sesión
-    this._cookie.set("token", pass, Constants.timeExpireCookie, "/");
+    // Registra la cookie con el token de sesión
+    this.cookie.set('token', pass, Constants.timeExpireCookie, '/');
 
-    //Registra el idioma de acuerdo a la configuración de usuario
-    this._translateService.use('es');
+    // Registra el idioma de acuerdo a la configuración de usuario
+    this.translateService.use('es');
 
-    //Retorna si está logueado
+    // Retorna si está logueado
     return this.isLogged$();
   }
 
@@ -62,14 +64,14 @@ export class AuthService {
   isLogged$(): Observable<boolean> {
     return new Observable<boolean>(obs => {
       obs.next((this.getToken().length > 0) ? true : false);
-    })
+    });
   }
 
   /**
    * Obtiene el token almacenado
    */
   getToken(): string {
-    return this._cookie.get("token");
+    return this.cookie.get('token');
   }
 
 }

@@ -9,7 +9,7 @@ import { MimeRouterNavigate } from 'src/app/core/navigate/mime-router-navigate';
   styleUrls: ['./mimebase.component.scss']
 })
 export class MimebaseComponent implements OnInit {
-  constructor(public _router: Router, public _ar: ActivatedRoute, public _spinner: NgxSpinnerService) { }
+  constructor(public router: Router, public ar: ActivatedRoute, public spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
   }
@@ -19,15 +19,15 @@ export class MimebaseComponent implements OnInit {
    * @param route Ruta
    */
   navigateByMimeRouting(route: string) {
-    MimeRouterNavigate.navigateByMimeRouting(this._router, route)
+    MimeRouterNavigate.navigateByMimeRouting(this.router, route);
   }
 
   /**
-  * Navega por la ruta del router actual
-  * @param route Ruta
-  */
+   * Navega por la ruta del router actual
+   * @param route Ruta
+   */
   navigate(route: string) {
-    this._router.navigate([route], { relativeTo: this._ar });
+    this.router.navigate([route], { relativeTo: this.ar });
   }
 
   /**
@@ -43,14 +43,14 @@ export class MimebaseComponent implements OnInit {
    */
   spinnerShow() {
     console.log('INI');
-    this._spinner.show();
+    this.spinner.show();
   }
 
   /**
    * Hide NgxSpinner
    */
   spinnerHide() {
-    this._spinner.hide();
+    this.spinner.hide();
   }
 
 }

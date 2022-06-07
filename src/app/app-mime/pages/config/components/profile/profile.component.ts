@@ -8,15 +8,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _snip: NgxSpinnerService) {
+  constructor(private snip: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
-    this._snip.show();
- 
+    this.snip.show(); 
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this._snip.hide();
+      // spinner ends after 5 seconds
+      this.snip.hide();
     }, 5000);
   }
 }

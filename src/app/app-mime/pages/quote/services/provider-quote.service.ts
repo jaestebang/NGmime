@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/app-mime/user/services/auth.service';
+import { Constants } from 'src/app/global/constants';
 import { Crypto } from 'src/app/global/crypto';
 import { IProducts } from '../interfaces/iproducts';
 
@@ -14,8 +15,9 @@ import { IProducts } from '../interfaces/iproducts';
  */
 export class ProviderQuoteService {
   private prodagents: IProducts[];
+  private urlApi: string = Constants.API_MIME;
 
-  constructor(private _http: HttpClient, private _aus: AuthService) { }
+  constructor(private http: HttpClient, private aus: AuthService) { }
 
   /**
    * Inicaliza prámetros: 
@@ -25,27 +27,27 @@ export class ProviderQuoteService {
    */
   initParameters() {
 
-    //Valida si está logueado
-    this._aus.isLogged$()
+    // Valida si está logueado
+    this.aus.isLogged$()
       .subscribe({
         next: (value) => {
           if (value) {
 
-            //Obtiene productos localstorage
-            const p: string = Crypto.decryptAES(localStorage.getItem("prodagents"));
+            // Obtiene productos localstorage
+            const p: string = Crypto.decryptAES(localStorage.getItem('prodagents'));
             this.prodagents = (p === undefined || p === null) ? null : <IProducts[]>JSON.parse(p);
 
             if (this.prodagents === undefined || this.prodagents === null) {
 
-              //Suscribe para obtener los productos / agentes
+              // Suscribe para obtener los productos / agentes
               this.getProductsAgents()
-                .subscribe((p: IProducts[]) => {
-                  this.prodagents = p;
-                  console.log("prodagents", p);
-                  //Guardar productos localstorage
-                  localStorage.setItem("prodagents", Crypto.encryptAES(JSON.stringify(p)));
+                .subscribe((proudcts: IProducts[]) => {
+                  this.prodagents = proudcts;
+                  console.log('prodagents', proudcts);
+                  // Guardar productos localstorage
+                  localStorage.setItem('prodagents', Crypto.encryptAES(JSON.stringify(p)));
                 });
-            };
+            }
           }
         }
       }
@@ -53,12 +55,12 @@ export class ProviderQuoteService {
   }
 
   /**
- * Obtiene productos / agentes
- * @returns Observable de tipo IQuestions[]
- */
+   * Obtiene productos / agentes
+   * @returns Observable de tipo IQuestions[]
+   */
   getProductsAgents(): Observable<IProducts[]> {
-    console.log("Inicio", this.getProductsAgents.name);
+    console.log('Inicio', this.getProductsAgents.name);
 
-    return this._http.get<IProducts[]>("/productsagents");
+    return this.http.get<IProducts[]>(`${this.urlApi}/productsagents`);
   }
 }

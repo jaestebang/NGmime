@@ -10,11 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  */
 import { AppComponent } from './app.component';
 
-
 /** 
  * Modulos MIME
  */
 import { MimeModule } from './app-mime/mime.module';
+import { CoreModule } from './core/core.module';
 
 /**
  * Interceptors
@@ -30,6 +30,7 @@ import { AuthInterceptorService } from './core/http/auth-interceptor.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CoreModule,
     MimeModule
   ],
   providers: [{

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -12,18 +12,18 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private _aus: AuthService,
-    private _router: Router,
-    private _snackBar: MatSnackBar
+    private aus: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
-    this._aus.init();
+    this.aus.init();
     this.buildForm();
   }
 
@@ -37,32 +37,33 @@ export class AuthComponent implements OnInit {
   login(e: Event) {
     e.preventDefault();
 
-    //Obtiene datos del form
-    let user: string = this.form.get("user").value;
-    let pass: string = this.form.get("pass").value;
+    // Obtiene datos del form
+    let user: string = this.form.get('user').value;
+    let pass: string = this.form.get('pass').value;
 
-    //Encripta credenciales
+    // Encripta credenciales
     user = Crypto.encryptAES(user.trim());
     pass = Crypto.encryptAES(user.trim());
 
-    //Suscribe al método login
+    // Suscribe al método login
     if (this.form.valid) {
-      this._aus.login(user, pass)
+      this.aus.login(user, pass)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
           next: (value) => {
             if (value) {
-              this._router.navigate(['']);
-              this._snackBar.open("Has iniciado sesión", "Hecho", { duration: 20000 });
+              this.router.navigate(['']);
+              this.snackBar.open('Has iniciado sesión', 'Hecho', { duration: 20000 });
             }
           }
-        })
+        });
     }
   }
 
   whiteSpace(control: AbstractControl): ValidationErrors | null {
-    const s: String = control.value;
-    if (s.trim().length === 0) return { required: true }
+    const s: string = control.value;
+    if (s.trim().length === 0)
+      return { required: true };
     return null;
   }
 

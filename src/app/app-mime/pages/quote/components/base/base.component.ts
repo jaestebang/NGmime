@@ -23,39 +23,36 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
   stepperOrientation: Observable<StepperOrientation>;
   orientationValid: boolean;
 
-  /**
-   * Constructor
-   * @param _squote 
-   * @param _fb 
-   * @param _router 
-   * @param _ar 
-   */
-  constructor(private _squote: QuoteService,
-    private _fb: FormBuilder,
-    public _router: Router,
-    public _ar: ActivatedRoute,
-    public _spinner: NgxSpinnerService,
-    private _breakpointObserver: BreakpointObserver) {
+  constructor(
+    private squote: QuoteService,
+    private fb: FormBuilder,
+    public router: Router,
+    public ar: ActivatedRoute,
+    public spinner: NgxSpinnerService,
+    private breakpointObserver: BreakpointObserver
+  ) {
 
-    //Inicializa base
-    super(_router, _ar, _spinner);
+    // Inicializa base
+    super(router, ar, spinner);
 
-    //Orientación stepperOrientation
-    this.stepperOrientation = this._breakpointObserver
+    // Orientación stepperOrientation
+    this.stepperOrientation = this.breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
-    //Inicializa FormGroup
-    this.managementForm = this._fb.group({ init: [''] });
-    this.riskForm = this._fb.group({ init: [''] });
+    // Inicializa FormGroup
+    this.managementForm = this.fb.group({ init: [''] });
+    this.riskForm = this.fb.group({ init: [''] });
 
-    //Orientación de la pantalla
-    this._breakpointObserver.observe([
+    // Orientación de la pantalla
+    this.breakpointObserver.observe([
       '(orientation: landscape)',
     ]).subscribe((result) => {
       this.orientationValid = result.matches;
-      if (result.matches) this.spinnerHide();
-      if (!result.matches) this.spinnerShow();
+      if (result.matches)
+        this.spinnerHide();
+      if (!result.matches)
+        this.spinnerShow();
     });
   }
 
@@ -64,24 +61,24 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getData();
-    console.log("id", this._ar.snapshot.paramMap.get('id'))
+    console.log('id', this.ar.snapshot.paramMap.get('id'));
   }
 
   /**
    * Obtiene datos
    */
-  getData(): void{
+  getData(): void {
     this.spinnerShow();
     setTimeout(() => {
       this.spinnerHide();
 
-      //Obtiene base de cotización
-      this._squote.getQuote()
+      // Obtiene base de cotización
+      this.squote.getQuote()
         .subscribe((quote: IQuote) => {
           this.quote = quote;
-          console.log("Quote", this.quote);
+          console.log('Quote', this.quote);
 
-          //Compilamos Forms
+          // Compilamos Forms
           this.buildForm(quote.questions, this.managementForm);
           this.buildForm(quote.risk.questions, this.riskForm);
 
@@ -91,17 +88,19 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
   }
 
   /**
-   Compilamos los controles recibidos en this.questions y adicionamos a questionForm
+   * Compilamos los controles recibidos en this.questions y adicionamos a questionForm
+   * @param quest Questions
+   * @param formQuestion FormGroup
    */
   private buildForm(quest: IQuestions[], formQuestion: FormGroup) {
     try {
       if (quest) {
         quest.forEach(q => {
 
-          //Obtenemos un nuevo control desde el FormBuilder
-          let c: AbstractControl = this._fb.control('');
+          // Obtenemos un nuevo control desde el FormBuilder
+          let c: AbstractControl = this.fb.control('');
 
-          //Asignamos validators
+          // Asignamos validators
           if (q.required)
             c.setValidators([Validators.required]);
           if (q.minLength)
@@ -113,31 +112,31 @@ export class BaseComponent extends MimebaseComponent implements OnInit {
           if (q.max)
             c.setValidators([Validators.min(q.min)]);
 
-          //Seteamos valores
-          if (q.type == "date" && !q.options) {
+          // Seteamos valores
+          if (q.type === 'date' && !q.options) {
             c.setValue(new Date(q.value).toISOString().substring(0, 10));
           } else {
             c.setValue(q.value);
           }
 
-          //Recalcular valores y status de validación del control
+          // Recalcular valores y status de validación del control
           c.updateValueAndValidity();
 
-          //Adicionamos el control al FormGroup
+          // Adicionamos el control al FormGroup
           formQuestion.addControl(q.key, c);
         });
       }
     } catch (e) {
-      console.log("Error Build", e);
+      console.log('Error Build', e);
     }
   }
 
   onManagement() {
 
-    //Navegar a una ruta principal    
-    this.navigateByMimeRouting("profile");
+    // Navegar a una ruta principal    
+    this.navigateByMimeRouting('profile');
 
-    //Se navega a la ruta, relativo a la posición actual
-    //this.navigate("management");
+    // Se navega a la ruta, relativo a la posición actual
+    // this.navigate('management');
   }
 }

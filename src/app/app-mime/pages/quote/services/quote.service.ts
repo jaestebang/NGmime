@@ -4,30 +4,33 @@ import { HttpClient } from '@angular/common/http';
 import { IQuestions } from '../interfaces/iquestions';
 import { IRisk } from '../interfaces/irisk';
 import { IQuote } from '../interfaces/iquote';
+import { Constants } from 'src/app/global/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteService {
 
-  constructor(private _http: HttpClient) { }
+  private urlApi: string = Constants.API_MIME;
+
+  constructor(private http: HttpClient) { }
 
   /**
    * Obtiene preguntas
    * @returns Observable de tipo IQuestions[]
    */
   getQuestions(): Observable<IQuestions[]> {
-    console.log("Inicio", this.getQuestions.name);
-    return this._http.get<IQuestions[]>("/questions");
+    console.log('Inicio', this.getQuestions.name);
+    return this.http.get<IQuestions[]>(`${this.urlApi}/questions`);
   }
 
   /**
- * Obtiene preguntas
- * @returns Observable de tipo IQuestions[]
- */
+   * Obtiene preguntas
+   * @returns Observable de tipo IQuestions[]
+   */
   getRisk(): Observable<IRisk> {
-    console.log("Inicio", this.getRisk.name);
-    return this._http.get<IRisk>("/risk");
+    console.log('Inicio', this.getRisk.name);
+    return this.http.get<IRisk>(`${this.urlApi}/risk`);
   }
 
   /**
@@ -35,9 +38,8 @@ export class QuoteService {
    * @returns Observable de tipo IQuote[]
    */
   getQuote(): Observable<IQuote> {
-    console.log("Inicio", this.getQuote.name);
-    return this._http.get<IQuote>("/quote");
+    console.log('Inicio', this.getQuote.name);
+    return this.http.get<IQuote>(`${this.urlApi}/quote`);
   }
-
 
 }

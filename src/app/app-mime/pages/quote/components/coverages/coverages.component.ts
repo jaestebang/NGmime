@@ -11,11 +11,11 @@ import { ICoverages } from '../../interfaces/icoverages';
 })
 export class CoveragesComponent implements OnInit, OnChanges {
 
-  //Variables Públicas
+  // Variables Públicas
   dataSource = new MatTableDataSource<ICoverages>();
   displayedColumns: string[] = ['key', 'description', 'capital'];
 
-  //Inputs Decorator
+  // Inputs Decorator
   @Input() form: FormGroup;
   @Input() dynamiccoverages: ICoverages[];
 
@@ -23,7 +23,7 @@ export class CoveragesComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataSource = new MatTableDataSource<ICoverages>(this.dynamiccoverages);
-    console.log("Coberturas", this.dynamiccoverages);
+    console.log('Coberturas', this.dynamiccoverages);
   }
 
   ngOnInit(): void {

@@ -17,12 +17,19 @@ import { CoveragesComponent } from './components/coverages/coverages.component';
  * @returns QuoteService.initParameters()
  */
 export function initProviderFactory(provider: ProviderQuoteService) {
-  console.log("Iincio Module");
   return () => provider.initParameters();
 }
 
 @NgModule({
-  declarations: [QuestionsComponent, BaseComponent, ManagementComponent, RiskComponent, AddresComponent, VehicleComponent, CoveragesComponent],
+  declarations: [
+    QuestionsComponent,
+    BaseComponent,
+    ManagementComponent,
+    RiskComponent,
+    AddresComponent,
+    VehicleComponent,
+    CoveragesComponent
+  ],
   imports: [
     CommonModule,
     SharedFormsModule,
@@ -41,9 +48,9 @@ export class QuoteModule {
 
   /**
    * Constructor de la clase, en carga perezosa no carga desde APP_INITIALIZER
-   * @param _pqs ProviderQuoteService
+   * @param pqs ProviderQuoteService
    */
-  constructor(_pqs: ProviderQuoteService) {
-    _pqs.initParameters();
+  constructor(pqs: ProviderQuoteService) {
+    pqs.initParameters();
   }
 }

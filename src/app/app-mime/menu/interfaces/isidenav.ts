@@ -10,7 +10,7 @@ export interface ISidenav {
     route?: boolean,
     icon?: boolean,
     modo?: EOperation,
-    app?: ISidenav[]
+    app?: ISidenav[],
 }
 
 

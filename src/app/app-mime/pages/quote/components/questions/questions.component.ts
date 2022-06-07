@@ -8,14 +8,14 @@ import { IQuestions } from '../../interfaces/iquestions';
 })
 export class QuestionsComponent implements OnInit, OnChanges {
 
-  //Inputs Decorator
+  // Inputs Decorator
   @Input() dynamicquestion: IQuestions;
   @Input() form: FormGroup;
 
-  //Publics
+  // Publics
   questionForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -28,7 +28,7 @@ export class QuestionsComponent implements OnInit, OnChanges {
   getOptions(q: IQuestions): boolean {
     let ind = false;
     Object.keys(q).forEach(key => {
-      if (key === "options") {
+      if (key === 'options') {
         ind = true;
       }
     });

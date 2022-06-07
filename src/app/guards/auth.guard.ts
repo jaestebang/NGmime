@@ -11,29 +11,29 @@ import { Crypto } from '../global/crypto';
 export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
   private isLogged: Observable<boolean>;
-  constructor(private _router: Router, private _aus: AuthService) {
+  constructor(private router: Router, private aus: AuthService) {
 
   }
 
   /**
    * Búsqueda de aplicación
-   * @param aom Isidenav
+   * @param cod Código Aplicación
    */
   private filterApp(cod: string): boolean {
 
     let ind: boolean = false;
 
-    //Obtiene menú localstorage
-    const m: string = Crypto.decryptAES(localStorage.getItem("menu"));
+    // Obtiene menú localstorage
+    const m: string = Crypto.decryptAES(localStorage.getItem('menu'));
     const menu: ISidenav[] = (m === undefined || m === null) ? null : <ISidenav[]>JSON.parse(m);
 
-    //Filtra en las opciones
+    // Filtra en las opciones
     if (!(m === undefined || m === null)) {
       try {
         menu.forEach((aom => {
           if (ind) return ind;
 
-          //Busca la aplicación
+          // Busca la aplicación
           if (!(aom.app === undefined || aom.app === null)) {
             aom.app.map(function mapper(s) {
               if (ind) return;
@@ -53,12 +53,12 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
         }));
 
       } catch (e) {
-        console.log("error", e);
+        console.log('error', e);
       }
 
-      //Si no está la opción no permite ingreso
+      // Si no está la opción no permite ingreso
       if (!ind) {
-        this._router.navigate(["forbidden"]);
+        this.router.navigate(['forbidden']);
       }
     }
     return ind;
@@ -75,17 +75,17 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     let ind: boolean;
 
-    //Valida si está logueado
-    this._aus.isLogged$()
+    // Valida si está logueado
+    this.aus.isLogged$()
       .subscribe({
         next: (value) => {
           ind = value;
-          if (!value) this._router.navigate(["auth"]);
+          if (!value) this.router.navigate(['auth']);
         }
       });
 
-    //Valida si permite opción de menú
-    const PATH: String[] = next.routeConfig.path.toString().split("/");
+    // Valida si permite opción de menú
+    const PATH: string[] = next.routeConfig.path.toString().split('/');
     ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
     return ind;
   }
