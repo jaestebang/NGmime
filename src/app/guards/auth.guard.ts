@@ -78,7 +78,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     // Valida si está logueado
     this.aus.isLogged$()
       .subscribe({
-        next: (value) => {
+        next: (value: boolean) => {
           ind = value;
           if (!value) this.router.navigate(['auth']);
         }
@@ -86,7 +86,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     // Valida si permite opción de menú
     const PATH: string[] = next.routeConfig.path.toString().split('/');
-    ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
+    //ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
     return ind;
   }
 
