@@ -1,0 +1,66 @@
+@use '~@angular/material'as mat;
+
+@include mat.core();
+
+/*Colors Define*/
+$mime-dark-app-primary: mat.define-palette(mat.$indigo-palette, 900);
+$mime-dark-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$mime-dark-app-warn: mat.define-palette(mat.$green-palette);
+
+/*Theme Define*/
+$mime-dark-theme: mat.define-dark-theme((color: (primary: $mime-dark-app-primary,
+      accent: $mime-dark-app-accent, warn: $mime-dark-app-warn)));
+
+/*Background Define*/
+@function mat-set-background($theme, $backgroundColor) {
+  $palette-color: map-get($theme, color);
+  $background: map-get($palette-color, background);
+  $background: map_merge($background, (hover: $backgroundColor));
+  $palette-color: map_merge($palette-color, (background: $background));
+  @return map_merge($theme, (color: $palette-color));
+}
+
+/*Set Background*/
+//$mime-dark-theme: mat-set-background($mime-dark-theme, map-get(mat.$indigo-palette, 100));
+
+/*Colors Define*/
+$dark-palette-color: map-get($map: $mime-dark-theme, $key: color);
+$dark-bg-color: map-get($map: $dark-palette-color, $key: background);
+$dark-fg-color: map-get($map: $dark-palette-color, $key: foreground);
+$dark-primary-color: $mime-dark-app-primary;
+$dark-accent-color: $mime-dark-app-accent;
+$dark-warn-color: $mime-dark-app-warn;
+
+@mixin define-theme($theme) {
+  /*Colors Define*/
+  $palette-color: map-get($map: $theme, $key: color);
+  $bg-color: map-get($map: $palette-color, $key: background);
+  $fg-color: map-get($map: $palette-color, $key: foreground);
+  $primary-color: map-get($map: $palette-color, $key: primary);
+}
+
+
+/*Class CSS Dark Theme*/
+.mime-dark-theme {
+  @include angular-material-theme($mime-dark-theme);
+  @include define-theme($mime-dark-theme);
+
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
+    background-color: map-get($map: $dark-bg-color, $key: background) !important;
+  }
+
+
+  .mat-card {
+    color: map-get($map: $dark-fg-color, $key: text) !important;
+    background-color: map-get($map: $dark-bg-color, $key: card) !important;
+  }
+
+  .mat-header-cell {
+    color: map-get($map: $dark-fg-color, $key: text) !important;
+  }
+
+  .mat-header-row {
+    background-color: mat-color($dark-primary-color) !important;
+  }
+}

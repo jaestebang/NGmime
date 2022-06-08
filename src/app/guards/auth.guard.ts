@@ -11,53 +11,54 @@ import { Crypto } from '../global/crypto';
 export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
   private isLogged: Observable<boolean>;
-  constructor(private _route: Router, private _aus: AuthService) {
+  constructor(private router: Router, private aus: AuthService) {
 
   }
 
   /**
    * Búsqueda de aplicación
-   * @param aom Isidenav
+   * @param cod Código Aplicación
    */
   private filterApp(cod: string): boolean {
 
     let ind: boolean = false;
 
-    //Obtiene menú localstorage
-    const m: string = Crypto.decryptAES(localStorage.getItem("menu"));
+    // Obtiene menú localstorage
+    const m: string = Crypto.decryptAES(localStorage.getItem('menu'));
     const menu: ISidenav[] = (m === undefined || m === null) ? null : <ISidenav[]>JSON.parse(m);
 
-    //Filtra en las opciones
+    // Filtra en las opciones
     if (!(m === undefined || m === null)) {
-      /* for (let i: number = 0; i < menu.length; ++i){
-         let menu_i = menu[i];
-       }*/
-
       try {
         menu.forEach((aom => {
           if (ind) return ind;
 
-          //Busca la aplicación
+          // Busca la aplicación
           if (!(aom.app === undefined || aom.app === null)) {
             aom.app.map(function mapper(s) {
-              if (Array.isArray(s)) {
-                return s.map(mapper);
+              if (ind) return;
+              if (!(s.app === undefined || s.app === null)) {
+                return s.app.map(mapper);
               } else {
-                if (s.codigo === cod) ind = true;
+                if (s.params !== undefined && s.params !== null) {
+                  ind = s.params.includes(cod);
+                }
               }
             });
           } else if (aom.route) {
-            if (aom.codigo === cod) ind = true;
+            if (!(aom === undefined || aom === null))
+              ind = aom.params.includes(cod);
           }
 
         }));
+
       } catch (e) {
-        console.log("error", e);
+        console.log('error', e);
       }
 
-      //Si no está la opción no permite ingreso
+      // Si no está la opción no permite ingreso
       if (!ind) {
-        alert("No tiene acceso a esta opción");
+        this.router.navigate(['forbidden']);
       }
     }
     return ind;
@@ -74,21 +75,18 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
     let ind: boolean;
 
-    //Valida si está logueado
-    this._aus.isLogged$()
+    // Valida si está logueado
+    this.aus.isLogged$()
       .subscribe({
-        next: (value) => {
+        next: (value: boolean) => {
           ind = value;
-          if (!value) this._route.navigate(["auth"]);
+          if (!value) this.router.navigate(['auth']);
         }
-      }
-    );
-    
-    //Valida si permite opción de menú
-    ind = (ind && next.routeConfig.outlet === "snavoutlet") ? this.filterApp(next.routeConfig.path) : ind;
+      });
 
-    if (!ind) this._route.navigate(["auth"]);
-
+    // Valida si permite opción de menú
+    const PATH: string[] = next.routeConfig.path.toString().split('/');
+    //ind = (ind && !PATH.includes('mime')) ? this.filterApp(PATH[0].toString()) : ind;
     return ind;
   }
 

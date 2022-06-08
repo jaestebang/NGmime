@@ -1,0 +1,8 @@
+{
+    "app": "NGmime",
+    "title": "MIME Insurance",
+    "quote": {
+        "data": "Datos Póliza",
+        "persons": "Terceros"
+    }
+}

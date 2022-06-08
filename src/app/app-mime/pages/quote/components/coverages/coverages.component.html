@@ -1,0 +1,29 @@
+<div class="coverageForm">
+    <table mat-table [dataSource]="getDataSource()">
+
+        <!-- Key Column -->
+        <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef>Cobertura</th>
+            <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+        </ng-container>
+        <!-- Key Column -->
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        <!-- Description Column -->
+
+        <!-- Capital Column -->
+        <ng-container matColumnDef="capital">
+            <th mat-header-cell *matHeaderCellDef>Capital</th>
+            <td mat-cell *matCellDef="let element"> {{element.capital}} </td>
+        </ng-container>
+        <!-- Capital Column -->        
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>

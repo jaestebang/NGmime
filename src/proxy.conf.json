@@ -6,10 +6,37 @@
         "pathRewrite": {"^/menu" : ""}
     },
 
+    "/quote": {
+        "target": "http://localhost:3000/quote",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/quote" : ""}
+    },    
+
+    "/risk": {
+        "target": "http://localhost:3000/risk",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/risk" : ""}
+    },    
+
+    "/questions": {
+        "target": "http://localhost:3000/questions",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/questions" : ""}
+    },
+
+    "/productsagents": {
+        "target": "http://localhost:3000/productsagents",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/productsagents" : ""}
+    },
     "/translate": {
         "target": "http://localhost:3000/translate",
         "secure": false,
         "changeOrigin": true,
-        "pathRewrite": {"^/menu" : ""}
+        "pathRewrite": {"^/translate" : ""}
     }
 }

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 import { AuthGuard } from '../guards/auth.guard';
+import { ErrorComponent } from '../shared/components/error/error.component';
 import { SidenavComponent } from './menu/components/sidenav/sidenav.component';
 import { ProfileComponent } from './pages/config/components/profile/profile.component';
 import { AuthComponent } from './user/components/auth/auth.component';
-import { NotfoundComponent } from '../shared/components/notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -25,8 +25,14 @@ const routes: Routes = [
         outlet: 'snavoutlet'
       },
       {
+        path: 'quote',
+        loadChildren: () => import('./pages/quote/quote.module').then(m => m.QuoteModule),
+        canActivate: [AuthGuard],
+        outlet: 'snavoutlet'
+      },
+      {
         path: '**',
-        component: NotfoundComponent,
+        component: ErrorComponent,
         outlet: 'snavoutlet'
       }
     ]
@@ -34,6 +40,18 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
+  },
+  {
+    path: 'error/:id',
+    component: ErrorComponent
+  },
+  {
+    path: 'forbidden',
+    redirectTo: 'error/403'
+  },
+  {
+    path: '**',
+    redirectTo: 'error/404'
   }
 ];
 

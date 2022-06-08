@@ -1,0 +1,72 @@
+@import '../../../../../../assets/styles/mime.scss';
+
+.base-data {
+    display: flex;
+    font-size: 13px;
+
+    .data {
+        width: 70%;
+        @include mime-themes() {
+            border-right: 1px solid;
+            border-color: map-get($map: get('fg-color'), $key: divider);
+        }
+    }
+
+    .questions {
+        padding-left: 10px;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+:Host ::ng-deep .coverageForm {
+    div {
+        width: 100%;
+    }
+
+    table {
+        width: 95%;
+    }
+
+    .mat-cell {
+        font-size: inherit;
+    }
+
+    .mat-header-cell {
+        font-size: inherit;
+    }
+
+    .mat-header-row {
+        height: 30px;
+    }
+
+    .mat-row {
+        height: 25px;
+    }
+}
+
+:Host ::ng-deep .questionForm>td {
+    width: 100%;
+    float: right;
+}
+
+:Host ::ng-deep .managementForm>td {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    grid-column-gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+:Host ::ng-deep .questions .mat-form-field {
+    width: 100%
+}
+
+:Host ::ng-deep .mat-form-field-infix {
+    padding: 0.4em 0;
+}
+
+:Host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0.5em;
+}

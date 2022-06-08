@@ -53,6 +53,14 @@ button {
     }
 }
 
+.login{
+    background: crimson;
+    height: 100vh;  
+    display: flex;     
+    align-items: center;
+    justify-content: center;
+}
+
 .login-card {
     width: 300px;
     min-width: 300px;

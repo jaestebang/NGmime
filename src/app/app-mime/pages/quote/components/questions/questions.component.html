@@ -1,0 +1,29 @@
+<div class="questionForm" [formGroup]="questionForm">
+    <!--Label-->
+    <!-- <td>{{ dynamicquestion.label }}</td> -->
+
+    <!--Inputs-->
+    <td>
+        <!--Verifica si tiene opciones-->
+        <div *ngIf="dynamicquestion.options">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ dynamicquestion.label }}</mat-label>
+                <mat-select [id]="dynamicquestion.key" [value]="dynamicquestion.value"
+                    [formControlName]="dynamicquestion.key">
+                    <mat-option *ngFor="let opt of dynamicquestion.options" [value]="opt.key">
+                        {{ opt.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!--Verfica si no tiene opciones-->
+        <div *ngIf="!getOptions(dynamicquestion)">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ dynamicquestion.label }}</mat-label>
+                <input matInput [id]="dynamicquestion.key" [type]="dynamicquestion.type"
+                    [formControlName]="dynamicquestion.key">
+            </mat-form-field>
+        </div>
+    </td>
+</div>

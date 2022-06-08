@@ -1,0 +1,48 @@
+.app-error {
+    background-color: rgba(48, 64, 84, 0.11);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .mat-card{
+        padding: 2px;
+    }
+}
+
+.error-card {
+    width: 400px;
+    min-width: 400px;
+    margin: 100px auto;
+
+    .mat-card-title{
+        border-radius: 4px;
+    }
+}
+
+.app-error .error-icon {
+    height: 120px;
+    width: 120px;
+    font-size: 120px;
+}
+
+.app-error .error-title {
+    font-size: 5rem;
+    font-weight: 900;
+}
+
+.app-error .error-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300
+}
+
+.fix {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

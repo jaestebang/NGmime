@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ISidenav } from '../../interfaces/isidenav';
 import { SidenavService } from '../../services/sidenav.service';
 
@@ -20,17 +21,18 @@ import { SidenavService } from '../../services/sidenav.service';
 
 export class MenuItemsComponent implements OnInit {
 
-  //Inputs
+  // Inputs
   @Input() menuitem: ISidenav;
   @Input() idx: number;
 
-  //Variables clase
+  // Variables clase
   expanded: boolean;
 
-  constructor(private _snav: SidenavService) {
+  constructor(private snav: SidenavService, private ar: ActivatedRoute) {
 
-    //Se inicializa si no está definida
-    if (this.idx === undefined || this.idx === null) this.idx = 0;
+    // Se inicializa si no está definida
+    if (this.idx === undefined || this.idx === null)
+      this.idx = 0;
   }
 
   ngOnInit(): void {
@@ -43,13 +45,15 @@ export class MenuItemsComponent implements OnInit {
   onItemSelected(item: ISidenav) {
     if (item.app && item.app.length) {
       this.expanded = !this.expanded;
-    } else this.ontoggleSideNav();
+    } else {
+      this.ontoggleSideNav();
+    }
   }
 
   /**
    * Emite el evento toogle SideNav
    */
   ontoggleSideNav(): void {
-    this._snav.toggleSnav();
+    this.snav.toggleSnav();
   }
 }

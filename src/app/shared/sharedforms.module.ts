@@ -1,14 +1,15 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { MimebaseComponent } from './components/mimebase/mimebase.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { ErrorComponent } from './components/error/error.component';
+import { MaterialModule } from './material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    NotfoundComponent,
+    ErrorComponent,
     MimebaseComponent
   ],
   imports: [
@@ -16,7 +17,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -24,9 +26,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    NotfoundComponent,
+    ErrorComponent,
     MimebaseComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule
   ]
 })
   
