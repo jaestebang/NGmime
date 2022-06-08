@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
+import { notAuth } from 'src/app/core/http/auth-interceptor.service';
 import { Constants } from 'src/app/global/constants';
 import { ISidenav } from '../interfaces/isidenav';
 
@@ -20,7 +21,8 @@ export class SidenavService {
   getMenuSidenav(): Observable<ISidenav[]> {
 
     // Obtener menú API
-    return this.http.get<ISidenav[]>(this.urlApi);
+    // Envía contexto deshabilitando authorization { context: notAuth() }
+    return this.http.get<ISidenav[]>(this.urlApi, { context: notAuth() });
   }
 
   /**

@@ -144,7 +144,7 @@ export class SidenavComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe((menu: ISidenav[]) => {
 
           // Guardar menú localstorage
-          localStorage.setItem('menu', Crypto.encryptAES(JSON.stringify(m)));
+          localStorage.setItem('menu', Crypto.encryptAES(JSON.stringify(menu)));
 
           // Asigna menú
           this.menu = menu;
